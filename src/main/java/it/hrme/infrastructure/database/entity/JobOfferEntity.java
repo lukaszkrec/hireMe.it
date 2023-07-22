@@ -35,13 +35,13 @@ public class JobOfferEntity extends BaseEntity {
     @Column(name = "date_published")
     private Date datePublished;
 
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "skill_id")
+    private SkillEntity skillEntity;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "agent_id")
     private AgentEntity agentEntity;
-
-    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
-    @JoinColumn(name = "skill_entity_id")
-    private SkillEntity skillEntity;
 
     @OneToOne(mappedBy = "jobOfferEntity", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     private ContractEntity contractEntity;
@@ -50,7 +50,7 @@ public class JobOfferEntity extends BaseEntity {
     private Set<WorkTypeEntity> workTypeEntities;
 
     @OneToMany(mappedBy = "jobOfferEntity", fetch = FetchType.EAGER)
-    private Set<WorkTimesEntity> workTimesEntities;
+    private Set<RequiredWorkAvailability> workTimesEntities;
 
     @OneToMany(mappedBy = "jobOfferEntity", fetch = FetchType.EAGER)
     private Set<EmploymentFormEntity> employmentFormEntities;

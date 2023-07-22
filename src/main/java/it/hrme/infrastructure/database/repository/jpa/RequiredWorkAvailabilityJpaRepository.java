@@ -1,9 +1,9 @@
 package it.hrme.infrastructure.database.repository.jpa;
 
-import it.hrme.infrastructure.database.entity.WorkTimesEntity;
+import it.hrme.infrastructure.database.entity.RequiredWorkAvailability;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface WorkTimesJpaRepository extends JpaRepository<WorkTimesEntity, Long> {
+public interface RequiredWorkAvailabilityJpaRepository extends JpaRepository<RequiredWorkAvailability, Long> {
 }

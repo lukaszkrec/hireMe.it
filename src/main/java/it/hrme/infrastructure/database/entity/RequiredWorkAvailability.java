@@ -11,23 +11,19 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "work_time")
-public class WorkTimesEntity extends BaseEntity{
+@Table(name = "required_work_availability")
+public class RequiredWorkAvailability extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "work_time_id")
+    @Column(name = "required_work_availability_id")
     private Long id;
 
     @Column(name = "required_work_availability")
     @Enumerated(EnumType.STRING)
-    private RequiredWorkAvailability requiredWorkAvailability;
+    private WorkAvailability workAvailability;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "job_offer_id")
     private JobOfferEntity jobOfferEntity;
-
-    enum RequiredWorkAvailability {
-        FULL_TIME, PART_TIME
-    }
 }

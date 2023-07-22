@@ -20,7 +20,7 @@ public class TechnologyEntity extends BaseEntity {
     private Long id;
 
     @Column(name = "technology_name")
-    private String name;
+    private String technologyName;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "skill_id")

@@ -20,8 +20,8 @@ public class LanguageEntity extends BaseEntity {
     @Column(name = "language_id")
     private Long id;
 
-    @Column(name = "name")
-    private String name;
+    @Column(name = "language_name")
+    private String languageName;
 
     @Column(name = "language_level")
     private String languageLevel;

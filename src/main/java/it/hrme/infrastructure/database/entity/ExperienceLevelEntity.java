@@ -19,14 +19,10 @@ public class ExperienceLevelEntity extends BaseEntity {
     @Column(name = "experience_level_id")
     private Long id;
 
-    @Column(name = "seniority")
+    @Column(name = "level")
     @Enumerated(EnumType.STRING)
-    private Seniority seniority;
+    private Level level;
 
     @OneToOne(mappedBy = "experienceLevelEntity", fetch = FetchType.LAZY)
     private SkillEntity skillEntity;
-
-    enum Seniority {
-        JUNIOR, MID, SENIOR
-    }
 }

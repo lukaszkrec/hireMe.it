@@ -19,14 +19,10 @@ public class AvailabilityEntity extends BaseEntity {
     @Column(name = "availability_id")
     private Long id;
 
-    @Column(name = "availability_status")
+    @Column(name = "status")
     @Enumerated(EnumType.STRING)
-    private AvailabilityStatus availabilityStatus;
+    private Status status;
 
     @OneToOne(mappedBy = "availabilityEntity")
     private CandidateEntity candidateEntity;
-
-    enum AvailabilityStatus {
-        ACTIVE, SUSPENDED
-    }
 }

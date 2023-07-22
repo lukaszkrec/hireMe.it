@@ -11,7 +11,7 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "work_entity")
+@Table(name = "work_type")
 public class WorkTypeEntity extends BaseEntity {
 
     @Id
@@ -27,7 +27,5 @@ public class WorkTypeEntity extends BaseEntity {
     @JoinColumn(name = "job_offer_id")
     private JobOfferEntity jobOfferEntity;
 
-    enum Type {
-        REMOTE, STATIONARY, HYBRID
-    }
+
 }

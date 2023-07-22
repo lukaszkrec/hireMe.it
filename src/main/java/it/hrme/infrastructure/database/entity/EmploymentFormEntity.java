@@ -16,7 +16,7 @@ public class EmploymentFormEntity extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "employemnt_form_id")
+    @Column(name = "employment_form_id")
     private Long id;
 
     @Column(name = "form")
@@ -26,8 +26,4 @@ public class EmploymentFormEntity extends BaseEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "job_offer_id")
     private JobOfferEntity jobOfferEntity;
-
-    enum Form {
-        B2B, EMPLOYMENT_CONTRACT
-    }
 }
