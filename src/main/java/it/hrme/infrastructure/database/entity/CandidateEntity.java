@@ -39,8 +39,9 @@ public class CandidateEntity extends BaseEntity {
     @Column(name = "work_interest")
     private boolean workInterest;
 
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private SkillEntity skillEntity;
+    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    @JoinTable(name = "candidate_skill", joinColumns = @JoinColumn(name = "candidate_id"), inverseJoinColumns = @JoinColumn(name = "skill_id"))
+    private Set<SkillEntity> skillEntities;
 
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "availability_id")

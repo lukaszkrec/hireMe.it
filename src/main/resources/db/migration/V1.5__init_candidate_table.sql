@@ -11,7 +11,6 @@ create table candidate
     uuid            varchar(255) not null,
     address_id      bigint       not null,
     availability_id bigint       not null,
-    skill_id        bigint       not null,
     primary key (candidate_id),
     unique (candidate_id, email, phone),
     constraint fk_candidate_address
@@ -19,8 +18,5 @@ create table candidate
             references address (address_id),
     constraint fk_candidate_availability
         foreign key (availability_id)
-            references availability (availability_id),
-    constraint fk_candidate_skill
-        foreign key (skill_id)
-            references skill (skill_id)
+            references availability (availability_id)
 );

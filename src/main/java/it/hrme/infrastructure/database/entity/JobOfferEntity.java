@@ -31,9 +31,9 @@ public class JobOfferEntity extends BaseEntity {
     @Column(name = "date_published")
     private Date datePublished;
 
-    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
-    @JoinColumn(name = "skill_id")
-    private SkillEntity skillEntity;
+    @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    @JoinTable(name = "job_offer_skill", joinColumns = @JoinColumn(name = "job_offer_id"), inverseJoinColumns = @JoinColumn(name = "skill_id"))
+    private Set<SkillEntity> skillEntities;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "agent_id")
@@ -53,4 +53,12 @@ public class JobOfferEntity extends BaseEntity {
 
     @OneToMany(mappedBy = "jobOfferEntity", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Set<LocationEntity> locationEntities;
+
+    public void addSkill(SkillEntity skillEntity) {
+        this.skillEntities.add(skillEntity);
+    }
+
+    public void remove(SkillEntity skillEntity) {
+        this.skillEntities.remove(skillEntity);
+    }
 }
