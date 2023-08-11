@@ -12,12 +12,8 @@ import lombok.*;
 @AllArgsConstructor
 @Entity
 @Table(name = "experience_level")
+@AttributeOverride(name = "id", column = @Column(name = "experience_level_id"))
 public class ExperienceLevelEntity extends BaseEntity {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "experience_level_id")
-    private Long id;
 
     @Column(name = "level")
     @Enumerated(EnumType.STRING)

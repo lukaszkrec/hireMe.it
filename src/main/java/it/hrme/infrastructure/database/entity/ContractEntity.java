@@ -14,12 +14,8 @@ import java.util.Date;
 @AllArgsConstructor
 @Entity
 @Table(name = "contract")
+@AttributeOverride(name = "id", column = @Column(name = "contract_id"))
 public class ContractEntity extends BaseEntity {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "contract_id")
-    private Long id;
 
     @Column(name = "start_date")
     private Date startDate;

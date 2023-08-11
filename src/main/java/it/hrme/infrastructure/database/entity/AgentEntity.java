@@ -14,12 +14,8 @@ import java.util.Set;
 @AllArgsConstructor
 @Entity
 @Table(name = "agent")
+@AttributeOverride(name = "id", column = @Column(name = "agent_id"))
 public class AgentEntity extends BaseEntity {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "agent_id")
-    private Long id;
 
     @Column(name = "first_name")
     private String firstName;

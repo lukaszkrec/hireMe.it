@@ -12,12 +12,8 @@ import lombok.*;
 @AllArgsConstructor
 @Entity
 @Table(name = "availability")
+@AttributeOverride(name = "id", column = @Column(name = "availability_id"))
 public class AvailabilityEntity extends BaseEntity {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "availability_id")
-    private Long id;
 
     @Column(name = "status")
     @Enumerated(EnumType.STRING)

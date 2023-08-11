@@ -13,12 +13,8 @@ import lombok.*;
 @AllArgsConstructor
 @Entity
 @Table(name = "certification")
+@AttributeOverride(name = "id", column = @Column(name = "certification_id"))
 public class CertificationEntity extends BaseEntity {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "certification_id")
-    private Long id;
 
     @Column(name = "certification_name")
     private String certificationName;

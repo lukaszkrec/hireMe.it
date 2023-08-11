@@ -12,12 +12,8 @@ import lombok.*;
 @AllArgsConstructor
 @Entity
 @Table(name = "technology")
+@AttributeOverride(name = "id", column = @Column(name = "technology_id"))
 public class TechnologyEntity extends BaseEntity {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "technology_id")
-    private Long id;
 
     @Column(name = "technology_name")
     private String technologyName;

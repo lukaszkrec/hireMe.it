@@ -12,12 +12,8 @@ import lombok.*;
 @AllArgsConstructor
 @Entity
 @Table(name = "work_type")
+@AttributeOverride(name = "id", column = @Column(name = "work_type_id"))
 public class WorkTypeEntity extends BaseEntity {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "work_type_id")
-    private Long id;
 
     @Column(name = "type")
     @Enumerated(EnumType.STRING)

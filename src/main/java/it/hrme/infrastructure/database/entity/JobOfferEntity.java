@@ -16,12 +16,8 @@ import java.util.Set;
 @AllArgsConstructor
 @Entity
 @Table(name = "job_offer")
+@AttributeOverride(name = "id", column = @Column(name = "job_offer_id"))
 public class JobOfferEntity extends BaseEntity {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "job_offer_id")
-    private Long id;
 
     @Column(name = "title")
     private String title;

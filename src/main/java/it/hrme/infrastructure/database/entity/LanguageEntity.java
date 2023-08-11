@@ -13,12 +13,8 @@ import lombok.*;
 @AllArgsConstructor
 @Entity
 @Table(name = "language")
+@AttributeOverride(name = "id", column = @Column(name = "language_id"))
 public class LanguageEntity extends BaseEntity {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "language_id")
-    private Long id;
 
     @Column(name = "language_name")
     private String languageName;

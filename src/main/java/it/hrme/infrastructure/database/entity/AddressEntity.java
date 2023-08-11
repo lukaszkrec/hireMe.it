@@ -12,12 +12,8 @@ import lombok.*;
 @AllArgsConstructor
 @Entity
 @Table(name = "address")
+@AttributeOverride(name = "id", column = @Column(name = "address_id"))
 public class AddressEntity extends BaseEntity {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "address_id")
-    private Long id;
 
     @Column(name = "country")
     private String country;

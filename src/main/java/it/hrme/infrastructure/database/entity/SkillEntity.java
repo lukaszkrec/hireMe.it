@@ -14,12 +14,8 @@ import java.util.Set;
 @AllArgsConstructor
 @Entity
 @Table(name = "skill")
+@AttributeOverride(name = "id", column = @Column(name = "skill_id"))
 public class SkillEntity extends BaseEntity {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "skill_id")
-    private Long id;
 
     @OneToMany(mappedBy = "skillEntity")
     private Set<CertificationEntity> certifications;

@@ -12,12 +12,8 @@ import lombok.*;
 @AllArgsConstructor
 @Entity
 @Table(name = "employment_form")
+@AttributeOverride(name = "id", column = @Column(name = "employment_form_id"))
 public class EmploymentFormEntity extends BaseEntity {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "employment_form_id")
-    private Long id;
 
     @Column(name = "form")
     @Enumerated(EnumType.STRING)
