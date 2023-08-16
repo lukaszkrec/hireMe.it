@@ -1,4 +1,4 @@
 package it.hrme.business.dao;
 
-interface CompanyDAO {
+public interface CompanyDAO {
 }

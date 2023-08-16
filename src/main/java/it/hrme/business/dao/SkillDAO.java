@@ -1,4 +1,4 @@
 package it.hrme.business.dao;
 
-interface SkillDAO {
+public interface SkillDAO {
 }

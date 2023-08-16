@@ -1,17 +1,19 @@
 package it.hrme.infrastructure.database.entity;
 
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
+import lombok.experimental.SuperBuilder;
 
 @Getter
-@Setter
-@EqualsAndHashCode(callSuper = true)
-@ToString
-@Builder
-@NoArgsConstructor
-@AllArgsConstructor
 @Entity
+@SuperBuilder
+@NoArgsConstructor
 @Table(name = "location")
+@EqualsAndHashCode(callSuper = true)
+@ToString(exclude = "jobOffer", callSuper = true)
 @AttributeOverride(name = "id", column = @Column(name = "location_id"))
 public class LocationEntity extends BaseEntity {
 
@@ -29,5 +31,5 @@ public class LocationEntity extends BaseEntity {
 
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
     @JoinColumn(name = "job_offer_id")
-    private JobOfferEntity jobOfferEntity;
+    private JobOfferEntity jobOffer;
 }

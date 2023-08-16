@@ -1,4 +1,8 @@
 package it.hrme.business.dao;
 
-interface AgentDAO {
+import it.hrme.domain.Agent;
+
+public interface AgentDAO {
+
+    Agent save(Agent agent);
 }

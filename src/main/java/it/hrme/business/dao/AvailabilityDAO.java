@@ -1,4 +1,4 @@
 package it.hrme.business.dao;
 
-interface AvailabilityDAO {
+public interface AvailabilityDAO {
 }

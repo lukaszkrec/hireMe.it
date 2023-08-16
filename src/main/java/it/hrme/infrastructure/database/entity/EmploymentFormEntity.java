@@ -1,17 +1,19 @@
 package it.hrme.infrastructure.database.entity;
 
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
+import lombok.experimental.SuperBuilder;
 
 @Getter
-@Setter
-@EqualsAndHashCode(callSuper = true)
-@ToString
-@Builder
-@NoArgsConstructor
-@AllArgsConstructor
 @Entity
+@SuperBuilder
+@NoArgsConstructor
 @Table(name = "employment_form")
+@EqualsAndHashCode(callSuper = true)
+@ToString(exclude = {"jobOffer"}, callSuper = true)
 @AttributeOverride(name = "id", column = @Column(name = "employment_form_id"))
 public class EmploymentFormEntity extends BaseEntity {
 
@@ -21,5 +23,9 @@ public class EmploymentFormEntity extends BaseEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "job_offer_id")
-    private JobOfferEntity jobOfferEntity;
+    private JobOfferEntity jobOffer;
+
+    public enum Form {
+        B2B, EMPLOYMENT_CONTRACT
+    }
 }

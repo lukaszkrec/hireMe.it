@@ -1,19 +1,21 @@
 package it.hrme.infrastructure.database.entity;
 
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
+import lombok.experimental.SuperBuilder;
 
 import java.util.Set;
 
 @Getter
-@Setter
-@EqualsAndHashCode(callSuper = true)
-@ToString
-@Builder
-@NoArgsConstructor
-@AllArgsConstructor
 @Entity
+@SuperBuilder
+@NoArgsConstructor
 @Table(name = "candidate")
+@EqualsAndHashCode(callSuper = true)
+@ToString(exclude = {"skills", "availability", "address", "contracts"}, callSuper = true)
 @AttributeOverride(name = "id", column = @Column(name = "candidate_id"))
 public class CandidateEntity extends BaseEntity {
 
@@ -40,17 +42,18 @@ public class CandidateEntity extends BaseEntity {
     private boolean workInterest;
 
     @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
-    @JoinTable(name = "candidate_skill", joinColumns = @JoinColumn(name = "candidate_id"), inverseJoinColumns = @JoinColumn(name = "skill_id"))
-    private Set<SkillEntity> skillEntities;
+    @JoinTable(name = "candidate_skill", joinColumns = @JoinColumn(name = "candidate_id"),
+            inverseJoinColumns = @JoinColumn(name = "skill_id"))
+    private Set<SkillEntity> skills;
 
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "availability_id")
-    private AvailabilityEntity availabilityEntity;
+    private AvailabilityEntity availability;
 
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "address_id")
-    private AddressEntity addressEntity;
+    private AddressEntity address;
 
-    @OneToMany(mappedBy = "candidateEntity", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
-    private Set<ContractEntity> jobContractEntities;
+    @OneToMany(mappedBy = "candidate", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
+    private Set<ContractEntity> contracts;
 }

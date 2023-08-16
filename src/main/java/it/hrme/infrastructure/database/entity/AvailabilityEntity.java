@@ -1,17 +1,19 @@
 package it.hrme.infrastructure.database.entity;
 
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
+import lombok.experimental.SuperBuilder;
 
 @Getter
-@Setter
-@EqualsAndHashCode(callSuper = true)
-@ToString
-@Builder
-@NoArgsConstructor
-@AllArgsConstructor
 @Entity
+@SuperBuilder
+@NoArgsConstructor
 @Table(name = "availability")
+@EqualsAndHashCode(callSuper = true)
+@ToString(exclude = {"candidate"}, callSuper = true)
 @AttributeOverride(name = "id", column = @Column(name = "availability_id"))
 public class AvailabilityEntity extends BaseEntity {
 
@@ -19,6 +21,10 @@ public class AvailabilityEntity extends BaseEntity {
     @Enumerated(EnumType.STRING)
     private Status status;
 
-    @OneToOne(mappedBy = "availabilityEntity")
-    private CandidateEntity candidateEntity;
+    @OneToOne(mappedBy = "availability")
+    private CandidateEntity candidate;
+
+    public enum Status {
+        ACTIVE, SUSPENDED
+    }
 }

@@ -1,19 +1,21 @@
 package it.hrme.infrastructure.database.entity;
 
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
+import lombok.experimental.SuperBuilder;
 
 import java.util.Set;
 
 @Getter
-@Setter
-@EqualsAndHashCode(callSuper = true)
-@ToString
-@Builder
-@NoArgsConstructor
-@AllArgsConstructor
 @Entity
+@SuperBuilder
+@NoArgsConstructor
 @Table(name = "agent")
+@EqualsAndHashCode(callSuper = true)
+@ToString(exclude = {"company", "jobOffers"}, callSuper = true)
 @AttributeOverride(name = "id", column = @Column(name = "agent_id"))
 public class AgentEntity extends BaseEntity {
 
@@ -31,8 +33,8 @@ public class AgentEntity extends BaseEntity {
 
     @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "company_id")
-    private CompanyEntity companyEntity;
+    private CompanyEntity company;
 
-    @OneToMany(mappedBy = "agentEntity")
-    private Set<JobOfferEntity> jobOfferEntities;
+    @OneToMany(mappedBy = "agent", cascade = {CascadeType.PERSIST, CascadeType.REFRESH})
+    private Set<JobOfferEntity> jobOffers;
 }

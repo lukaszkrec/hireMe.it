@@ -1,4 +1,4 @@
 package it.hrme.business.dao;
 
-interface EmploymentFormDAO {
+public interface EmploymentFormDAO {
 }

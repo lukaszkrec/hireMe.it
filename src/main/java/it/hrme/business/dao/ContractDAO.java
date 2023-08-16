@@ -1,4 +1,4 @@
 package it.hrme.business.dao;
 
-interface ContractDAO {
+public interface ContractDAO {
 }

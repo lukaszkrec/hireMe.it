@@ -1,17 +1,19 @@
 package it.hrme.infrastructure.database.entity;
 
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
+import lombok.experimental.SuperBuilder;
 
 @Getter
-@Setter
-@EqualsAndHashCode(callSuper = true)
-@ToString
-@Builder
-@NoArgsConstructor
-@AllArgsConstructor
 @Entity
+@SuperBuilder
+@NoArgsConstructor
 @Table(name = "address")
+@EqualsAndHashCode(callSuper = true)
+@ToString(exclude = {"candidate", "company"}, callSuper = true)
 @AttributeOverride(name = "id", column = @Column(name = "address_id"))
 public class AddressEntity extends BaseEntity {
 
@@ -27,9 +29,9 @@ public class AddressEntity extends BaseEntity {
     @Column(name = "street")
     private String street;
 
-    @OneToOne(mappedBy = "addressEntity", fetch = FetchType.LAZY)
-    private CandidateEntity candidateEntity;
+    @OneToOne(mappedBy = "address", fetch = FetchType.LAZY)
+    private CandidateEntity candidate;
 
-    @OneToOne(mappedBy = "addressEntity", fetch = FetchType.LAZY)
-    private CompanyEntity companyEntity;
+    @OneToOne(mappedBy = "address", fetch = FetchType.LAZY)
+    private CompanyEntity company;
 }

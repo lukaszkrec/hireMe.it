@@ -1,4 +1,4 @@
 package it.hrme.business.dao;
 
-interface LocationDAO {
+public interface LocationDAO {
 }

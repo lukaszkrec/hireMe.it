@@ -2,26 +2,25 @@ package it.hrme.infrastructure.database.entity;
 
 
 import jakarta.persistence.*;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 import java.util.UUID;
 
 @Getter
-@Setter
-@EqualsAndHashCode(of = "uuid")
-@NoArgsConstructor
+@ToString
 @MappedSuperclass
-abstract class BaseEntity {
+@NoArgsConstructor
+@SuperBuilder(toBuilder = true)
+@EqualsAndHashCode(of = "uuid")
+public abstract class BaseEntity {
 
+    @Builder.Default
+    @Column(name = "uuid")
+    private final String uuid = UUID.randomUUID()
+            .toString();
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
-
-    @Column(name = "uuid")
-    private String uuid = UUID.randomUUID()
-            .toString();
 }

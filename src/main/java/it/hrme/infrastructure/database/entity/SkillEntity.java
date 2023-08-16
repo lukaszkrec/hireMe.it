@@ -1,28 +1,30 @@
 package it.hrme.infrastructure.database.entity;
 
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
+import lombok.experimental.SuperBuilder;
 
 import java.util.Set;
 
 @Getter
-@Setter
-@EqualsAndHashCode(callSuper = true)
-@ToString
-@Builder
-@NoArgsConstructor
-@AllArgsConstructor
 @Entity
+@SuperBuilder
+@NoArgsConstructor
 @Table(name = "skill")
+@EqualsAndHashCode(callSuper = true)
+@ToString(exclude = {"candidates", "jobOffers"}, callSuper = true)
 @AttributeOverride(name = "id", column = @Column(name = "skill_id"))
 public class SkillEntity extends BaseEntity {
 
     @Column(name = "skill_name")
     private String skillName;
 
-    @ManyToMany(mappedBy = "skillEntities")
-    private Set<CandidateEntity> candidateEntities;
+    @ManyToMany(mappedBy = "skills")
+    private Set<CandidateEntity> candidates;
 
-    @ManyToMany(mappedBy = "skillEntities")
-    private Set<JobOfferEntity> jobOfferEntities;
+    @ManyToMany(mappedBy = "skills")
+    private Set<JobOfferEntity> jobOffers;
 }
