@@ -2,6 +2,7 @@ package it.hrme.domain;
 
 import lombok.*;
 
+import java.util.HashSet;
 import java.util.Set;
 
 @With
@@ -18,5 +19,6 @@ public class Agent {
     String phoneNumber;
     String email;
     Company company;
-    Set<JobOffer> jobOffers;
+    @Builder.Default
+    Set<JobOffer> jobOffers = new HashSet<>();
 }

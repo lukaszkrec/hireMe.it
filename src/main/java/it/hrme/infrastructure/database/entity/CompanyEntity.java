@@ -1,12 +1,10 @@
 package it.hrme.infrastructure.database.entity;
 
 import jakarta.persistence.*;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 import lombok.experimental.SuperBuilder;
 
+import java.util.HashSet;
 import java.util.Set;
 
 @Getter
@@ -28,8 +26,9 @@ public class CompanyEntity extends BaseEntity {
     @Column(name = "description")
     private String description;
 
+    @Builder.Default
     @OneToMany(mappedBy = "company", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
-    private Set<AgentEntity> agents;
+    private Set<AgentEntity> agents = new HashSet<>();
 
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "address_id")

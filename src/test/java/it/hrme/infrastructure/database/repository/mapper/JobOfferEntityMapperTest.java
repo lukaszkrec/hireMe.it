@@ -2,22 +2,16 @@ package it.hrme.infrastructure.database.repository.mapper;
 
 import it.hrme.domain.JobOffer;
 import it.hrme.infrastructure.database.entity.JobOfferEntity;
-import it.hrme.util.TestDataProvider;
+import it.hrme.util.MapperFixtures;
 import lombok.AllArgsConstructor;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-@SpringBootTest(classes = {JobOfferEntityMapperImpl.class,
-        WorkTypeEntityMapperImpl.class,
-        SkillEntityMapperImpl.class,
-        RequiredWorkAvailabilityEntityMapperImpl.class,
-        LocationEntityMapperImpl.class,
-        EmploymentFormEntityMapperImpl.class,
-        ContractEntityMapperImpl.class,})
+@SpringBootTest(classes = {JobOfferEntityMapperImpl.class, WorkTypeEntityMapperImpl.class, SkillEntityMapperImpl.class, RequiredWorkAvailabilityEntityMapperImpl.class, LocationEntityMapperImpl.class, EmploymentFormEntityMapperImpl.class, ContractEntityMapperImpl.class,})
 @AllArgsConstructor(onConstructor = @__(@Autowired))
-class JobOfferEntityMapperTest implements TestDataProvider {
+class JobOfferEntityMapperTest implements MapperFixtures {
 
     private JobOfferEntityMapper mapper;
 

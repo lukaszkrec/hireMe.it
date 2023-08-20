@@ -11,9 +11,9 @@ import org.mapstruct.ReportingPolicy;
         injectionStrategy = InjectionStrategy.CONSTRUCTOR)
 public interface LocationEntityMapper {
 
-    @Mapping(target = "jobOffer", ignore = true)
+    @Mapping(target = "jobOffers", ignore = true)
     LocationEntity mapToEntity(Location location);
 
-    @Mapping(target = "jobOffer", ignore = true)
+    @Mapping(target = "jobOffers", ignore = true)
     Location mapFromEntity(LocationEntity locationEntity);
 }

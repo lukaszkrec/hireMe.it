@@ -5,13 +5,14 @@ import it.hrme.infrastructure.database.entity.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.HashSet;
 import java.util.HexFormat;
 import java.util.Set;
 
 import static it.hrme.infrastructure.database.entity.EmploymentFormEntity.Form.B2B;
 import static it.hrme.infrastructure.database.entity.WorkTypeEntity.Type.HYBRID;
 
-public interface TestDataProvider {
+public interface MapperFixtures {
 
     default Candidate getCandidate() {
         return Candidate.builder()
@@ -20,10 +21,10 @@ public interface TestDataProvider {
                 .phone("+48 523 854 455")
                 .email("jan.kowalski.@gmail.com")
                 .photo(getPhoto())
-                .overview("Some text example about yourself")
+                .overview("Some text     example about yourself")
                 .workInterest(true)
                 .skills(Set.of(getSkill()))
-                .availability(getAvailability())
+                .status(Candidate.Status.ACTIVE)
                 .address(getAddress())
                 .contracts(Set.of(getContract()))
                 .build();
@@ -45,12 +46,6 @@ public interface TestDataProvider {
                 .build();
     }
 
-    default Availability getAvailability() {
-        return Availability.builder()
-                .status(Availability.Status.ACTIVE)
-                .build();
-    }
-
     default Skill getSkill() {
         return Skill.builder()
                 .skillName("Java")
@@ -64,7 +59,7 @@ public interface TestDataProvider {
                 .phoneNumber("+48 754 324 456")
                 .email("ania.anitowna@gmail.com")
                 .company(getCompanyEntity())
-                .jobOffers(Set.of(getJobOfferEntity()))
+                .jobOffers(new HashSet<>())
                 .build();
     }
 
@@ -138,11 +133,10 @@ public interface TestDataProvider {
                 .description("Supper company")
                 .salary(new BigDecimal("15000"))
                 .datePublished(LocalDate.now())
-                .skills(Set.of(getSkillEntity()))
-                .contract(getContractEntity())
                 .workTypes(Set.of(getWorkTypeEntity()))
-                .requiredWorkAvailabilities(Set.of(getRequiredWorkAvailabilityEntity()))
                 .employmentForms(Set.of(getEmploymentFormEntity()))
+                .requiredWorkAvailabilities(Set.of(getRequiredWorkAvailabilityEntity()))
+                .skills(Set.of(getSkillEntity()))
                 .locations(Set.of(getLocationEntity()))
                 .build();
     }
@@ -191,15 +185,8 @@ public interface TestDataProvider {
                 .overview("Some text example about yourself")
                 .workInterest(true)
                 .skills(Set.of(getSkillEntity()))
-                .availability(getAvailabilityEntity())
+                .status(CandidateEntity.Status.ACTIVE)
                 .address(getAddressEntity())
-                .contracts(Set.of(getContractEntity()))
-                .build();
-    }
-
-    default AvailabilityEntity getAvailabilityEntity() {
-        return AvailabilityEntity.builder()
-                .status(AvailabilityEntity.Status.ACTIVE)
                 .build();
     }
 

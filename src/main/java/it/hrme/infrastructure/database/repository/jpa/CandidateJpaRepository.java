@@ -10,14 +10,20 @@ import java.util.List;
 @Repository
 public interface CandidateJpaRepository extends JpaRepository<CandidateEntity, Long> {
 
-    CandidateEntity findByAvailability_Status(String status);
+    List<CandidateEntity> findByStatus(CandidateEntity.Status status);
 
     @Query("""
-            select candidate from CandidateEntity candidate
-            join fetch candidate.skills skills
-            join fetch candidate.address address
-            join fetch candidate.availability availability
-            where concat(skills.skillName , address.country , availability.status)  like %?1%
-                        """)
-    List<CandidateEntity> search(String keyword);
+            SELECT can FROM CandidateEntity can
+            JOIN FETCH can.skills skills
+            WHERE lower(skills.skillName) = lower(:skill)
+            """)
+    List<CandidateEntity> findAllBySkill(String skill);
+
+
+    @Query("""
+            SELECT can FROM CandidateEntity can
+            JOIN FETCH can.address add
+            WHERE lower(add.country) = lower(:country)
+            """)
+    List<CandidateEntity> findAllByCountry(String country);
 }

@@ -1,12 +1,10 @@
 package it.hrme.infrastructure.database.entity;
 
 import jakarta.persistence.*;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 import lombok.experimental.SuperBuilder;
 
+import java.util.HashSet;
 import java.util.Set;
 
 @Getter
@@ -15,7 +13,7 @@ import java.util.Set;
 @NoArgsConstructor
 @Table(name = "candidate")
 @EqualsAndHashCode(callSuper = true)
-@ToString(exclude = {"skills", "availability", "address", "contracts"}, callSuper = true)
+@ToString(exclude = {"skills", "address", "contracts"}, callSuper = true)
 @AttributeOverride(name = "id", column = @Column(name = "candidate_id"))
 public class CandidateEntity extends BaseEntity {
 
@@ -39,21 +37,30 @@ public class CandidateEntity extends BaseEntity {
     private String overview;
 
     @Column(name = "work_interest")
-    private boolean workInterest;
+    @Builder.Default
+    private boolean workInterest = true;
 
+    @Builder.Default
     @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
-    @JoinTable(name = "candidate_skill", joinColumns = @JoinColumn(name = "candidate_id"),
-            inverseJoinColumns = @JoinColumn(name = "skill_id"))
-    private Set<SkillEntity> skills;
+    @JoinTable(name = "candidate_skill",
+            joinColumns = @JoinColumn(name = "candidate_id"),
+            inverseJoinColumns = @JoinColumn(name = "skill_id")
+    )
+    private Set<SkillEntity> skills = new HashSet<>();
 
-    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name = "availability_id")
-    private AvailabilityEntity availability;
+    @Column(name = "candidate_status")
+    @Enumerated(EnumType.STRING)
+    private Status status;
 
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "address_id")
     private AddressEntity address;
 
+    @Builder.Default
     @OneToMany(mappedBy = "candidate", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
-    private Set<ContractEntity> contracts;
+    private Set<ContractEntity> contracts = new HashSet<>();
+
+    public enum Status {
+        ACTIVE, SUSPENDED
+    }
 }

@@ -4,6 +4,7 @@ import lombok.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.HashSet;
 import java.util.Set;
 
 @With
@@ -22,13 +23,18 @@ public class JobOffer {
     String description;
     BigDecimal salary;
     LocalDate datePublished;
-    Set<Skill> skills;
+    @Builder.Default
+    Set<Skill> skills = new HashSet<>();
     Agent agent;
     Contract contract;
-    Set<WorkType> workTypes;
-    Set<RequiredWorkAvailability> requiredWorkAvailabilities;
-    Set<EmploymentForm> employmentForms;
-    Set<Location> locations;
+    @Builder.Default
+    Set<WorkType> workTypes = new HashSet<>();
+    @Builder.Default
+    Set<RequiredWorkAvailability> requiredWorkAvailabilities = new HashSet<>();
+    @Builder.Default
+    Set<EmploymentForm> employmentForms = new HashSet<>();
+    @Builder.Default
+    Set<Location> locations = new HashSet<>();
 
     public void addSkill(Skill skillEntity) {
         this.skills.add(skillEntity);

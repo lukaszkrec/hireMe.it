@@ -2,6 +2,7 @@ package it.hrme.domain;
 
 import lombok.*;
 
+import java.util.HashSet;
 import java.util.Set;
 
 @With
@@ -14,6 +15,8 @@ public class Skill {
     Long id;
     String uuid;
     String skillName;
-    Set<Candidate> candidates;
-    Set<JobOffer> jobOffers;
+    @Builder.Default
+    Set<Candidate> candidates = new HashSet<>();
+    @Builder.Default
+    Set<JobOffer> jobOffers = new HashSet<>();
 }

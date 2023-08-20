@@ -1,12 +1,10 @@
 package it.hrme.infrastructure.database.entity;
 
 import jakarta.persistence.*;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 import lombok.experimental.SuperBuilder;
 
+import java.util.HashSet;
 import java.util.Set;
 
 @Getter
@@ -35,6 +33,7 @@ public class AgentEntity extends BaseEntity {
     @JoinColumn(name = "company_id")
     private CompanyEntity company;
 
-    @OneToMany(mappedBy = "agent", cascade = {CascadeType.PERSIST, CascadeType.REFRESH})
-    private Set<JobOfferEntity> jobOffers;
+    @Builder.Default
+    @OneToMany(mappedBy = "agent", cascade = CascadeType.ALL)
+    private Set<JobOfferEntity> jobOffers = new HashSet<>();
 }

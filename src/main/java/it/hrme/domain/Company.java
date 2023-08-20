@@ -2,6 +2,7 @@ package it.hrme.domain;
 
 import lombok.*;
 
+import java.util.HashSet;
 import java.util.Set;
 
 @With
@@ -16,6 +17,7 @@ public class Company {
     String companyName;
     String industry;
     String description;
-    Set<Agent> agents;
+    @Builder.Default
+    Set<Agent> agents = new HashSet<>();
     Address address;
 }

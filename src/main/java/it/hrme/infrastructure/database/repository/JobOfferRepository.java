@@ -8,10 +8,9 @@ import it.hrme.infrastructure.database.repository.mapper.JobOfferEntityMapper;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
+import org.springframework.util.StringUtils;
 
 import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 @Repository
 @RequiredArgsConstructor
@@ -21,11 +20,18 @@ public class JobOfferRepository implements JobOfferDAO {
     private final JobOfferEntityMapper offerEntityMapper;
 
     @Override
-    public Set<JobOffer> findAll() {
+    public JobOffer save(JobOffer jobOffer) {
+        JobOfferEntity jobOfferEntity = offerEntityMapper.mapToEntity(jobOffer);
+        JobOfferEntity savedJobOffer = jobOfferJpaRepository.save(jobOfferEntity);
+        return offerEntityMapper.mapFromEntity(savedJobOffer);
+    }
+
+    @Override
+    public List<JobOffer> findAll() {
         return jobOfferJpaRepository.findAll()
                 .stream()
                 .map(offerEntityMapper::mapFromEntity)
-                .collect(Collectors.toSet());
+                .toList();
     }
 
     @Override
@@ -37,9 +43,44 @@ public class JobOfferRepository implements JobOfferDAO {
         return offerEntityMapper.mapFromEntity(jobOfferEntity);
     }
 
+
+    public List<JobOffer> findAllByWorkType(String workType) {
+        if (StringUtils.hasText(workType)) {
+            return jobOfferJpaRepository.findAllByWorkType(workType)
+                    .stream()
+                    .map(offerEntityMapper::mapFromEntity)
+                    .toList();
+        }
+        throw new RuntimeException("Unknown work type [%s]".formatted(workType));
+    }
+
     @Override
-    public List<JobOffer> search(String keyword) {
-        return jobOfferJpaRepository.search(keyword)
+    public List<JobOffer> findAllBySkill(String skill) {
+        return jobOfferJpaRepository.findAllBySkill(skill)
+                .stream()
+                .map(offerEntityMapper::mapFromEntity)
+                .toList();
+    }
+
+    @Override
+    public List<JobOffer> findAllByRequiredWorkAvailability(String workAvailability) {
+        return jobOfferJpaRepository.findAllByRequiredWorkAvailability(workAvailability)
+                .stream()
+                .map(offerEntityMapper::mapFromEntity)
+                .toList();
+    }
+
+    @Override
+    public List<JobOffer> findAllByEmploymentForm(String employmentForm) {
+        return jobOfferJpaRepository.findAllByEmploymentForm(employmentForm)
+                .stream()
+                .map(offerEntityMapper::mapFromEntity)
+                .toList();
+    }
+
+    @Override
+    public List<JobOffer> findAllByCountry(String country) {
+        return jobOfferJpaRepository.findAllByCountry(country)
                 .stream()
                 .map(offerEntityMapper::mapFromEntity)
                 .toList();

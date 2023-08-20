@@ -2,7 +2,7 @@ package it.hrme.infrastructure.database.repository.mapper;
 
 import it.hrme.domain.Address;
 import it.hrme.infrastructure.database.entity.AddressEntity;
-import it.hrme.util.TestDataProvider;
+import it.hrme.util.MapperFixtures;
 import lombok.AllArgsConstructor;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -11,7 +11,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest(classes = AddressEntityMapperImpl.class)
 @AllArgsConstructor(onConstructor = @__(@Autowired))
-class AddressEntityMapperTest implements TestDataProvider {
+class AddressEntityMapperTest implements MapperFixtures {
 
     private AddressEntityMapper mapper;
 

@@ -12,9 +12,9 @@ import org.mapstruct.ReportingPolicy;
 public interface EmploymentFormEntityMapper {
 
 
-    @Mapping(target = "jobOffer", ignore = true)
+    @Mapping(target = "jobOffers", ignore = true)
     EmploymentForm mapFromEntity(EmploymentFormEntity employmentFormEntity);
 
-    @Mapping(target = "jobOffer", ignore = true)
+    @Mapping(target = "jobOffers", ignore = true)
     EmploymentFormEntity mapToEntity(EmploymentForm employmentForm);
 }

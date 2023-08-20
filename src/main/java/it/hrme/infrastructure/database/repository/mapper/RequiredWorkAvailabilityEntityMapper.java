@@ -11,9 +11,9 @@ import org.mapstruct.ReportingPolicy;
         injectionStrategy = InjectionStrategy.CONSTRUCTOR)
 public interface RequiredWorkAvailabilityEntityMapper {
 
-    @Mapping(target = "jobOffer", ignore = true)
+    @Mapping(target = "jobOffers", ignore = true)
     RequiredWorkAvailability mapFromEntity(RequiredWorkAvailabilityEntity requiredWorkAvailabilityEntity);
 
-    @Mapping(target = "jobOffer", ignore = true)
+    @Mapping(target = "jobOffers", ignore = true)
     RequiredWorkAvailabilityEntity mapToEntity(RequiredWorkAvailability workAvailability);
 }

@@ -1,11 +1,11 @@
 package it.hrme.infrastructure.database.entity;
 
 import jakarta.persistence.*;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 import lombok.experimental.SuperBuilder;
+
+import java.util.HashSet;
+import java.util.Set;
 
 @Getter
 @Entity
@@ -13,7 +13,7 @@ import lombok.experimental.SuperBuilder;
 @NoArgsConstructor
 @Table(name = "location")
 @EqualsAndHashCode(callSuper = true)
-@ToString(exclude = "jobOffer", callSuper = true)
+@ToString(exclude = "jobOffers", callSuper = true)
 @AttributeOverride(name = "id", column = @Column(name = "location_id"))
 public class LocationEntity extends BaseEntity {
 
@@ -29,7 +29,8 @@ public class LocationEntity extends BaseEntity {
     @Column(name = "address")
     private String address;
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
-    @JoinColumn(name = "job_offer_id")
-    private JobOfferEntity jobOffer;
+    @Builder.Default
+    @ManyToMany(mappedBy = "locations", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    private Set<JobOfferEntity> jobOffers = new HashSet<>();
+
 }

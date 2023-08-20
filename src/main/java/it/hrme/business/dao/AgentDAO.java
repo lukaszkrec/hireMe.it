@@ -5,4 +5,6 @@ import it.hrme.domain.Agent;
 public interface AgentDAO {
 
     Agent save(Agent agent);
+
+    Agent findById(Long agentId);
 }

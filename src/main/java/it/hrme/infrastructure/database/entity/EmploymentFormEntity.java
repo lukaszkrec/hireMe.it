@@ -1,11 +1,11 @@
 package it.hrme.infrastructure.database.entity;
 
 import jakarta.persistence.*;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 import lombok.experimental.SuperBuilder;
+
+import java.util.HashSet;
+import java.util.Set;
 
 @Getter
 @Entity
@@ -13,7 +13,7 @@ import lombok.experimental.SuperBuilder;
 @NoArgsConstructor
 @Table(name = "employment_form")
 @EqualsAndHashCode(callSuper = true)
-@ToString(exclude = {"jobOffer"}, callSuper = true)
+@ToString(exclude = {"jobOffers"}, callSuper = true)
 @AttributeOverride(name = "id", column = @Column(name = "employment_form_id"))
 public class EmploymentFormEntity extends BaseEntity {
 
@@ -21,9 +21,9 @@ public class EmploymentFormEntity extends BaseEntity {
     @Enumerated(EnumType.STRING)
     private Form form;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "job_offer_id")
-    private JobOfferEntity jobOffer;
+    @Builder.Default
+    @ManyToMany(mappedBy = "employmentForms", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    private Set<JobOfferEntity> jobOffers = new HashSet<>();
 
     public enum Form {
         B2B, EMPLOYMENT_CONTRACT

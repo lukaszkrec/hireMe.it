@@ -5,6 +5,7 @@ import it.hrme.domain.Agent;
 import it.hrme.infrastructure.database.entity.AgentEntity;
 import it.hrme.infrastructure.database.repository.jpa.AgentJpaRepository;
 import it.hrme.infrastructure.database.repository.mapper.AgentEntityMapper;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
@@ -20,5 +21,14 @@ public class AgentRepository implements AgentDAO {
         AgentEntity agentEntity = agentEntityMapper.mapToEntity(agent);
         AgentEntity savedAgentEntity = agentJpaRepository.save(agentEntity);
         return agentEntityMapper.mapFromEntity(savedAgentEntity);
+    }
+
+    @Override
+    public Agent findById(Long agentId) {
+        AgentEntity agentEntity = agentJpaRepository.findById(agentId)
+                .orElseThrow(() -> new EntityNotFoundException(
+                        "Agent with id: {%s} does not exist!".formatted(agentId))
+                );
+        return agentEntityMapper.mapFromEntity(agentEntity);
     }
 }

@@ -2,12 +2,13 @@ package it.hrme.domain;
 
 import lombok.*;
 
+import java.util.HashSet;
 import java.util.Set;
 
 @With
 @Value
 @Builder
-@ToString(exclude = {"skills", "availability", "address", "contracts"})
+@ToString(exclude = {"skills", "address", "contracts"})
 @EqualsAndHashCode(of = "uuid")
 public class Candidate {
 
@@ -20,8 +21,14 @@ public class Candidate {
     byte[] photo;
     String overview;
     boolean workInterest;
-    Set<Skill> skills;
-    Availability availability;
+    @Builder.Default
+    Set<Skill> skills = new HashSet<>();
+    Status status;
     Address address;
-    Set<Contract> contracts;
+    @Builder.Default
+    Set<Contract> contracts = new HashSet<>();
+
+    public enum Status {
+        ACTIVE, SUSPENDED
+    }
 }

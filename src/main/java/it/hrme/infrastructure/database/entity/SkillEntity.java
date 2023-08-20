@@ -1,12 +1,10 @@
 package it.hrme.infrastructure.database.entity;
 
 import jakarta.persistence.*;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 import lombok.experimental.SuperBuilder;
 
+import java.util.HashSet;
 import java.util.Set;
 
 @Getter
@@ -22,9 +20,11 @@ public class SkillEntity extends BaseEntity {
     @Column(name = "skill_name")
     private String skillName;
 
+    @Builder.Default
     @ManyToMany(mappedBy = "skills")
-    private Set<CandidateEntity> candidates;
+    private Set<CandidateEntity> candidates = new HashSet<>();
 
+    @Builder.Default
     @ManyToMany(mappedBy = "skills")
-    private Set<JobOfferEntity> jobOffers;
+    private Set<JobOfferEntity> jobOffers = new HashSet<>();
 }

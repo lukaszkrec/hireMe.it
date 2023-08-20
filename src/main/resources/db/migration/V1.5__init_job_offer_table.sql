@@ -6,7 +6,7 @@ create table job_offer
     salary         numeric(38, 2) not null,
     date_published timestamp(6)   not null,
     uuid           varchar(255)   not null,
-    agent_id       bigint         not null,
+    agent_id       bigint,
     primary key (job_offer_id),
     unique (job_offer_id),
     constraint fk_job_offer_agent

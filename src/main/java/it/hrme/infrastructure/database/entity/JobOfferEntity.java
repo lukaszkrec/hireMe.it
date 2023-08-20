@@ -1,16 +1,15 @@
 package it.hrme.infrastructure.database.entity;
 
 import jakarta.persistence.*;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 import lombok.experimental.SuperBuilder;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.HashSet;
 import java.util.Set;
 
+@Setter
 @Getter
 @Entity
 @SuperBuilder
@@ -18,6 +17,7 @@ import java.util.Set;
 @Table(name = "job_offer")
 @EqualsAndHashCode(callSuper = true)
 @ToString(exclude = {"skills",
+        "agent",
         "contract",
         "workTypes",
         "requiredWorkAvailabilities",
@@ -38,35 +38,50 @@ public class JobOfferEntity extends BaseEntity {
     @Column(name = "date_published")
     private LocalDate datePublished;
 
+    @Builder.Default
     @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
-    @JoinTable(name = "job_offer_skill", joinColumns = @JoinColumn(name = "job_offer_id"),
-            inverseJoinColumns = @JoinColumn(name = "skill_id"))
-    private Set<SkillEntity> skills;
+    @JoinTable(name = "job_offer_skill",
+            joinColumns = @JoinColumn(name = "job_offer_id"),
+            inverseJoinColumns = @JoinColumn(name = "skill_id")
+    )
+    private Set<SkillEntity> skills = new HashSet<>();
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     @JoinColumn(name = "agent_id")
     private AgentEntity agent;
 
     @OneToOne(mappedBy = "jobOffer", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     private ContractEntity contract;
 
-    @OneToMany(mappedBy = "jobOffer", fetch = FetchType.EAGER)
-    private Set<WorkTypeEntity> workTypes;
+    @Builder.Default
+    @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    @JoinTable(name = "job_offer_work_type",
+            joinColumns = @JoinColumn(name = "job_offer_id"),
+            inverseJoinColumns = @JoinColumn(name = "work_type_id")
+    )
+    private Set<WorkTypeEntity> workTypes = new HashSet<>();
 
-    @OneToMany(mappedBy = "jobOffer", fetch = FetchType.EAGER)
-    private Set<RequiredWorkAvailabilityEntity> requiredWorkAvailabilities;
+    @Builder.Default
+    @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    @JoinTable(name = "job_offer_required_work_availability",
+            joinColumns = @JoinColumn(name = "job_offer_id"),
+            inverseJoinColumns = @JoinColumn(name = "required_work_availability_id")
+    )
+    private Set<RequiredWorkAvailabilityEntity> requiredWorkAvailabilities = new HashSet<>();
 
-    @OneToMany(mappedBy = "jobOffer", fetch = FetchType.EAGER)
-    private Set<EmploymentFormEntity> employmentForms;
+    @Builder.Default
+    @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    @JoinTable(name = "job_offer_employment_form",
+            joinColumns = @JoinColumn(name = "job_offer_id"),
+            inverseJoinColumns = @JoinColumn(name = "employment_form_id")
+    )
+    private Set<EmploymentFormEntity> employmentForms = new HashSet<>();
 
-    @OneToMany(mappedBy = "jobOffer", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    private Set<LocationEntity> locations;
-
-    public void addSkill(SkillEntity skillEntity) {
-        this.skills.add(skillEntity);
-    }
-
-    public void remove(SkillEntity skillEntity) {
-        this.skills.remove(skillEntity);
-    }
+    @Builder.Default
+    @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    @JoinTable(name = "job_offer_location",
+            joinColumns = @JoinColumn(name = "job_offer_id"),
+            inverseJoinColumns = @JoinColumn(name = "location_id")
+    )
+    private Set<LocationEntity> locations = new HashSet<>();
 }

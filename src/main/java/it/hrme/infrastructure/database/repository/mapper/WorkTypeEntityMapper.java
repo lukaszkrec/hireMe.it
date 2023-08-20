@@ -11,9 +11,9 @@ import org.mapstruct.ReportingPolicy;
         injectionStrategy = InjectionStrategy.CONSTRUCTOR)
 public interface WorkTypeEntityMapper {
 
-    @Mapping(target = "jobOffer", ignore = true)
+    @Mapping(target = "jobOffers", ignore = true)
     WorkType mapFromEntity(WorkTypeEntity workTypeEntity);
 
-    @Mapping(target = "jobOffer", ignore = true)
+    @Mapping(target = "jobOffers", ignore = true)
     WorkTypeEntity mapToEntity(WorkType workType);
 }

@@ -4,7 +4,7 @@ create table contract
     start_date   timestamp(6) not null,
     end_date     timestamp(6) not null,
     uuid         varchar(255) not null,
-    candidate_id bigint       not null,
+    candidate_id bigint,
     job_offer_id bigint       not null,
     primary key (contract_id),
     unique (contract_id),

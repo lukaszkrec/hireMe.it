@@ -2,7 +2,7 @@ package it.hrme.infrastructure.database.repository.mapper;
 
 import it.hrme.domain.Agent;
 import it.hrme.infrastructure.database.entity.AgentEntity;
-import it.hrme.util.TestDataProvider;
+import it.hrme.util.MapperFixtures;
 import lombok.AllArgsConstructor;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -19,7 +19,7 @@ import org.springframework.boot.test.context.SpringBootTest;
         EmploymentFormEntityMapperImpl.class,
         ContractEntityMapperImpl.class})
 @AllArgsConstructor(onConstructor = @__(@Autowired))
-class AgentEntityMapperTest implements TestDataProvider {
+class AgentEntityMapperTest implements MapperFixtures {
 
     private AgentEntityMapper mapper;
 
