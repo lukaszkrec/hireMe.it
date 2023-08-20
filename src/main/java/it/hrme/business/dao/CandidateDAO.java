@@ -14,4 +14,8 @@ public interface CandidateDAO {
     List<Candidate> findAllByStatus(String status);
 
     Candidate findById(Long candidateId);
+
+    Candidate findByEmail(String candidateEmail);
+
+    void updateWorkInterest(String candidateEmail, boolean workInterest);
 }

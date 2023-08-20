@@ -7,6 +7,7 @@ import lombok.experimental.SuperBuilder;
 import java.util.HashSet;
 import java.util.Set;
 
+@Setter
 @Getter
 @Entity
 @SuperBuilder
@@ -48,9 +49,10 @@ public class CandidateEntity extends BaseEntity {
     )
     private Set<SkillEntity> skills = new HashSet<>();
 
+    @Builder.Default
     @Column(name = "candidate_status")
     @Enumerated(EnumType.STRING)
-    private Status status;
+    private Status status = Status.ACTIVE;
 
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "address_id")
@@ -60,7 +62,11 @@ public class CandidateEntity extends BaseEntity {
     @OneToMany(mappedBy = "candidate", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     private Set<ContractEntity> contracts = new HashSet<>();
 
+    @Getter
+    @AllArgsConstructor
     public enum Status {
-        ACTIVE, SUSPENDED
+        ACTIVE("Active"), SUSPENDED("Suspended");
+
+        private final String label;
     }
 }

@@ -17,8 +17,8 @@ public abstract class BaseEntity {
 
     @Builder.Default
     @Column(name = "uuid")
-    private final String uuid = UUID.randomUUID()
-            .toString();
+    private final String uuid = UUID.randomUUID().toString();
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")

@@ -43,7 +43,7 @@ public class JobOfferRepository implements JobOfferDAO {
         return offerEntityMapper.mapFromEntity(jobOfferEntity);
     }
 
-
+    @Override
     public List<JobOffer> findAllByWorkType(String workType) {
         if (StringUtils.hasText(workType)) {
             return jobOfferJpaRepository.findAllByWorkType(workType)

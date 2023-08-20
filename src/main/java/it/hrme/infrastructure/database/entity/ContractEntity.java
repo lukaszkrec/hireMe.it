@@ -25,11 +25,11 @@ public class ContractEntity extends BaseEntity {
     @Column(name = "end_date")
     private LocalDate endDate;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.PERSIST})
     @JoinColumn(name = "candidate_id")
     private CandidateEntity candidate;
 
-    @OneToOne(fetch = FetchType.EAGER)
+    @OneToOne(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinColumn(name = "job_offer_id")
     private JobOfferEntity jobOffer;
 }

@@ -25,7 +25,12 @@ public class EmploymentFormEntity extends BaseEntity {
     @ManyToMany(mappedBy = "employmentForms", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Set<JobOfferEntity> jobOffers = new HashSet<>();
 
+
+    @Getter
+    @AllArgsConstructor
     public enum Form {
-        B2B, EMPLOYMENT_CONTRACT
+        B2B("B2B"), EMPLOYMENT_CONTRACT("Employment contract");
+
+        private final String label;
     }
 }

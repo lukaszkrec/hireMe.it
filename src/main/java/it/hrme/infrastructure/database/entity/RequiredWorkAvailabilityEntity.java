@@ -25,7 +25,11 @@ public class RequiredWorkAvailabilityEntity extends BaseEntity {
     @ManyToMany(mappedBy = "requiredWorkAvailabilities", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Set<JobOfferEntity> jobOffers = new HashSet<>();
 
+    @Getter
+    @AllArgsConstructor
     public enum WorkAvailability {
-        FULL_TIME, PART_TIME
+        FULL_TIME("Full time"), PART_TIME("Part time");
+
+        private final String label;
     }
 }

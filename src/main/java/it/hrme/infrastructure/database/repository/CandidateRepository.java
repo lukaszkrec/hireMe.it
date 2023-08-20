@@ -57,7 +57,7 @@ public class CandidateRepository implements CandidateDAO {
                     .toList();
         }
 
-        throw new RuntimeException("Unknown status [%s]".formatted(status));
+        throw new EntityNotFoundException("Unknown status for CandidateEntity [%s]".formatted(status));
     }
 
     @Override
@@ -67,5 +67,26 @@ public class CandidateRepository implements CandidateDAO {
                         "Candidate with id: {%s} does not exist!".formatted(candidateId))
                 );
         return candidateEntityMapper.mapFromEntity(candidateEntity);
+    }
+
+    @Override
+    public Candidate findByEmail(String candidateEmail) {
+        return candidateJpaRepository.findByEmail(candidateEmail)
+                .map(candidateEntityMapper::mapFromEntity)
+                .orElseThrow(() -> new EntityNotFoundException(
+                        "Candidate with email: {%s} does not exist!".formatted(candidateEmail))
+                );
+    }
+
+    @Override
+    public void updateWorkInterest(String candidateEmail, boolean workInterest) {
+        Candidate candidate = findByEmail(candidateEmail);
+        CandidateEntity candidateEntity = candidateEntityMapper.mapToEntity(candidate);
+        if (workInterest) {
+            candidateEntity.setWorkInterest(true);
+            candidateEntity.setStatus(CandidateEntity.Status.ACTIVE);
+        }
+        candidateEntity.setWorkInterest(false);
+        candidateEntity.setStatus(CandidateEntity.Status.SUSPENDED);
     }
 }

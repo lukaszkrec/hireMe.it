@@ -31,6 +31,16 @@ public class CandidateJpaRepositoryTest implements EntityFixtures {
     }
 
     @Test
+    void should_find_candidate_by_email() {
+        //when
+        String email = "jan.kowalski.@gmail.com";
+        CandidateEntity candidateEntity = candidateJpaRepository.findByEmail(email).get();
+
+        //then
+        Assertions.assertThat(candidateEntity.getEmail()).isEqualTo(email);
+    }
+
+    @Test
     void should_find_candidate_by_status() {
         //when
         CandidateEntity.Status status = CandidateEntity.Status.ACTIVE;

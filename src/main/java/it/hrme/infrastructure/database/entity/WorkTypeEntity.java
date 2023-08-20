@@ -25,7 +25,11 @@ public class WorkTypeEntity extends BaseEntity {
     @ManyToMany(mappedBy = "workTypes", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Set<JobOfferEntity> jobOffers = new HashSet<>();
 
+    @Getter
+    @AllArgsConstructor
     public enum Type {
-        REMOTE, STATIONARY, HYBRID
+        REMOTE("Remote"), STATIONARY("Stationary"), HYBRID("Hybrid");
+
+        private final String label;
     }
 }

@@ -6,9 +6,12 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface CandidateJpaRepository extends JpaRepository<CandidateEntity, Long> {
+
+    Optional<CandidateEntity> findByEmail(String email);
 
     List<CandidateEntity> findByStatus(CandidateEntity.Status status);
 

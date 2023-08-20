@@ -31,4 +31,13 @@ public class AgentRepository implements AgentDAO {
                 );
         return agentEntityMapper.mapFromEntity(agentEntity);
     }
+
+    @Override
+    public Agent findByEmail(String agentEmail) {
+        return agentJpaRepository.findByEmail(agentEmail)
+                .map(agentEntityMapper::mapFromEntity)
+                .orElseThrow(() -> new EntityNotFoundException(
+                        "Agent with email: {%s} does not exist!".formatted(agentEmail))
+                );
+    }
 }

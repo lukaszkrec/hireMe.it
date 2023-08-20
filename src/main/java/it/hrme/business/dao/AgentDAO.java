@@ -7,4 +7,6 @@ public interface AgentDAO {
     Agent save(Agent agent);
 
     Agent findById(Long agentId);
+
+    Agent findByEmail(String agentEmail);
 }
