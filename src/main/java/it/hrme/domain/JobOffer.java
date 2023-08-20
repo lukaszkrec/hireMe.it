@@ -35,12 +35,4 @@ public class JobOffer {
     Set<EmploymentForm> employmentForms = new HashSet<>();
     @Builder.Default
     Set<Location> locations = new HashSet<>();
-
-    public void addSkill(Skill skillEntity) {
-        this.skills.add(skillEntity);
-    }
-
-    public void remove(Skill skillEntity) {
-        this.skills.remove(skillEntity);
-    }
 }

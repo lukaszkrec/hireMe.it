@@ -1,9 +1,12 @@
 package it.hrme.domain;
 
+import it.hrme.domain.exception.CandidateSuspendedStatusException;
 import lombok.*;
 
 import java.util.HashSet;
 import java.util.Set;
+
+import static it.hrme.domain.Candidate.Status.SUSPENDED;
 
 @With
 @Value
@@ -28,7 +31,11 @@ public class Candidate {
     @Builder.Default
     Set<Contract> contracts = new HashSet<>();
 
+    @Getter
+    @AllArgsConstructor
     public enum Status {
-        ACTIVE, SUSPENDED
+        ACTIVE("Active"), SUSPENDED("Suspended");
+
+        private final String label;
     }
 }

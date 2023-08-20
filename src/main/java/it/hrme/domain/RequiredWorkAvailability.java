@@ -18,7 +18,11 @@ public class RequiredWorkAvailability {
     @Builder.Default
     Set<JobOffer> jobOffers = new HashSet<>();
 
+    @Getter
+    @AllArgsConstructor
     public enum WorkAvailability {
-        FULL_TIME, PART_TIME
+        FULL_TIME("Full time"), PART_TIME("Part time");
+
+        private final String label;
     }
 }

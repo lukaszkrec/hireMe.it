@@ -18,7 +18,11 @@ public class EmploymentForm {
     @Builder.Default
     Set<JobOffer> jobOffers = new HashSet<>();
 
+    @Getter
+    @AllArgsConstructor
     public enum Form {
-        B2B, EMPLOYMENT_CONTRACT
+        B2B("B2B"), EMPLOYMENT_CONTRACT("Emloyment contract");
+
+        private final String label;
     }
 }
