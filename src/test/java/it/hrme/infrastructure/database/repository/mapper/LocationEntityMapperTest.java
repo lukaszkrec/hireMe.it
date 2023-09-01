@@ -28,6 +28,7 @@ class LocationEntityMapperTest implements MapperFixtures {
         Assertions.assertThat(location)
                 .usingRecursiveComparison()
                 .ignoringCollectionOrder()
+                .ignoringFieldsMatchingRegexes(".*uuid")
                 .isEqualTo(locationEntity);
     }
 

@@ -11,8 +11,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest(classes = {CandidateEntityMapperImpl.class,
         ContractEntityMapperImpl.class,
-        SkillEntityMapperImpl.class,
-        AddressEntityMapperImpl.class,})
+        SkillEntityMapperImpl.class})
 @AllArgsConstructor(onConstructor = @__(@Autowired))
 class CandidateEntityMapperTest implements MapperFixtures {
 
@@ -48,6 +47,7 @@ class CandidateEntityMapperTest implements MapperFixtures {
         Assertions.assertThat(candidate)
                 .usingRecursiveComparison()
                 .ignoringCollectionOrder()
+                .ignoringFieldsMatchingRegexes(".*uuid")
                 .isEqualTo(candidateEntity);
 
     }

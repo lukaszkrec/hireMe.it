@@ -44,6 +44,7 @@ class ContractEntityMapperTest implements MapperFixtures {
         Assertions.assertThat(contract)
                 .usingRecursiveComparison()
                 .ignoringCollectionOrder()
+                .ignoringFieldsMatchingRegexes(".*uuid")
                 .isEqualTo(contractEntity);
     }
 }

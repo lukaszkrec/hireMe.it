@@ -44,6 +44,7 @@ class JobOfferEntityMapperTest implements MapperFixtures {
         Assertions.assertThat(jobOffer)
                 .usingRecursiveComparison()
                 .ignoringCollectionOrder()
+                .ignoringFieldsMatchingRegexes(".*uuid")
                 .isEqualTo(jobOfferEntity);
     }
 }

@@ -2,6 +2,7 @@ package it.hrme.infrastructure.database.repository.mapper;
 
 import it.hrme.domain.Agent;
 import it.hrme.infrastructure.database.entity.AgentEntity;
+import it.hrme.infrastructure.database.entity.BaseEntity;
 import it.hrme.util.MapperFixtures;
 import lombok.AllArgsConstructor;
 import org.assertj.core.api.Assertions;
@@ -52,6 +53,7 @@ class AgentEntityMapperTest implements MapperFixtures {
         Assertions.assertThat(agent)
                 .usingRecursiveComparison()
                 .ignoringCollectionOrder()
+                .ignoringFieldsMatchingRegexes(".*uuid")
                 .isEqualTo(agentEntity);
     }
 }

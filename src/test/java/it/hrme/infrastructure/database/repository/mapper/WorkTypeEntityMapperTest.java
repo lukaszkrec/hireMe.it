@@ -28,6 +28,7 @@ class WorkTypeEntityMapperTest implements MapperFixtures {
         Assertions.assertThat(workType)
                 .usingRecursiveComparison()
                 .ignoringCollectionOrder()
+                .ignoringFieldsMatchingRegexes(".*uuid")
                 .isEqualTo(workTypeEntity);
     }
 

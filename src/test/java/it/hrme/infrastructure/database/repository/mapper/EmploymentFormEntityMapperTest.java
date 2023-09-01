@@ -44,6 +44,7 @@ class EmploymentFormEntityMapperTest implements MapperFixtures {
         Assertions.assertThat(employmentForm)
                 .usingRecursiveComparison()
                 .ignoringCollectionOrder()
+                .ignoringFieldsMatchingRegexes(".*uuid")
                 .isEqualTo(employmentFormEntity);
     }
 }

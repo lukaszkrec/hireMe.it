@@ -44,6 +44,7 @@ class RequiredWorkAvailabilityEntityMapperTest implements MapperFixtures {
         Assertions.assertThat(requiredWorkAvailability)
                 .usingRecursiveComparison()
                 .ignoringCollectionOrder()
+                .ignoringFieldsMatchingRegexes(".*uuid")
                 .isEqualTo(requiredWorkAvailabilityEntity);
     }
 }

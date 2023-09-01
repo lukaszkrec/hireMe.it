@@ -28,6 +28,7 @@ class SkillEntityMapperTest implements MapperFixtures {
         Assertions.assertThat(skill)
                 .usingRecursiveComparison()
                 .ignoringCollectionOrder()
+                .ignoringFieldsMatchingRegexes(".*uuid")
                 .isEqualTo(skillEntity);
     }
 

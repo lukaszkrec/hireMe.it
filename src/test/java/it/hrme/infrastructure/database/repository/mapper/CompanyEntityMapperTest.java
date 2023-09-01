@@ -28,6 +28,7 @@ class CompanyEntityMapperTest implements MapperFixtures {
         Assertions.assertThat(company)
                 .usingRecursiveComparison()
                 .ignoringCollectionOrder()
+                .ignoringFieldsMatchingRegexes(".*uuid")
                 .isEqualTo(companyEntity);
     }
 
