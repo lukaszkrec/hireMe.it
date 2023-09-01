@@ -8,7 +8,7 @@ create table agent
     uuid         varchar(255) not null,
     company_id   bigint       not null,
     primary key (agent_id),
-    unique (agent_id, email, phone_number),
+    unique (email, phone_number, uuid),
     constraint fk_agent_company
         foreign key (company_id)
             references company (company_id)

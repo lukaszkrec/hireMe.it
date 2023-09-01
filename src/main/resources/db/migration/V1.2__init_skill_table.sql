@@ -4,5 +4,5 @@ create table skill
     skill_name varchar(255) not null,
     uuid       varchar(255) not null,
     primary key (skill_id),
-    unique (skill_id)
+    unique (skill_name, uuid)
 );

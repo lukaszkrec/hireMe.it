@@ -4,5 +4,5 @@ create table work_type
     type         varchar(255) not null,
     uuid         varchar(255) not null,
     primary key (work_type_id),
-    unique (work_type_id)
+    unique (uuid)
 );

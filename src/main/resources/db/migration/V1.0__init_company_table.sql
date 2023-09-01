@@ -5,9 +5,6 @@ create table company
     description  varchar(255) not null,
     industry     varchar(255) not null,
     uuid         varchar(255) not null,
-    address_id   bigint       not null,
     primary key (company_id),
-    constraint fk_company_address
-        foreign key (address_id)
-            references address (address_id)
+    unique (uuid)
 );

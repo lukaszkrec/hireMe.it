@@ -10,12 +10,8 @@ create table candidate
     work_interest    boolean      not null,
     candidate_status varchar(255) not null,
     uuid             varchar(255) not null,
-    address_id       bigint       not null,
     primary key (candidate_id),
-    unique (candidate_id, email, phone),
-    constraint fk_candidate_address
-        foreign key (address_id)
-            references address (address_id)
+    unique (email, phone, uuid)
 );
 
 
