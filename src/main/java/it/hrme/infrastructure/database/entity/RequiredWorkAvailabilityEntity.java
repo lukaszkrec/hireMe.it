@@ -1,5 +1,6 @@
 package it.hrme.infrastructure.database.entity;
 
+import it.hrme.infrastructure.database.constants.WorkAvailability;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
@@ -22,14 +23,6 @@ public class RequiredWorkAvailabilityEntity extends BaseEntity {
     private WorkAvailability workAvailability;
 
     @Builder.Default
-    @ManyToMany(mappedBy = "requiredWorkAvailabilities", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToMany(mappedBy = "requiredWorkAvailabilities")
     private Set<JobOfferEntity> jobOffers = new HashSet<>();
-
-    @Getter
-    @AllArgsConstructor
-    public enum WorkAvailability {
-        FULL_TIME("Full time"), PART_TIME("Part time");
-
-        private final String label;
-    }
 }

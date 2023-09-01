@@ -11,7 +11,6 @@ import org.mapstruct.ReportingPolicy;
         injectionStrategy = InjectionStrategy.CONSTRUCTOR)
 public interface EmploymentFormEntityMapper {
 
-
     @Mapping(target = "jobOffers", ignore = true)
     EmploymentForm mapFromEntity(EmploymentFormEntity employmentFormEntity);
 

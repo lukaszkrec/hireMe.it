@@ -2,7 +2,10 @@ package it.hrme.infrastructure.database.entity;
 
 
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 import lombok.experimental.SuperBuilder;
 
 import java.util.UUID;
@@ -15,7 +18,6 @@ import java.util.UUID;
 @EqualsAndHashCode(of = "uuid")
 public abstract class BaseEntity {
 
-    @Builder.Default
     @Column(name = "uuid")
     private final String uuid = UUID.randomUUID().toString();
 

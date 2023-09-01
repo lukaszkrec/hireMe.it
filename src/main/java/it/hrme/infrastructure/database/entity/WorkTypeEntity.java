@@ -1,5 +1,6 @@
 package it.hrme.infrastructure.database.entity;
 
+import it.hrme.infrastructure.database.constants.Type;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
@@ -22,14 +23,8 @@ public class WorkTypeEntity extends BaseEntity {
     private Type type;
 
     @Builder.Default
-    @ManyToMany(mappedBy = "workTypes", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToMany(mappedBy = "workTypes")
     private Set<JobOfferEntity> jobOffers = new HashSet<>();
 
-    @Getter
-    @AllArgsConstructor
-    public enum Type {
-        REMOTE("Remote"), STATIONARY("Stationary"), HYBRID("Hybrid");
 
-        private final String label;
-    }
 }

@@ -4,9 +4,9 @@ import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 
-import java.util.HashSet;
 import java.util.Set;
 
+@Setter
 @Getter
 @Entity
 @SuperBuilder
@@ -29,8 +29,6 @@ public class LocationEntity extends BaseEntity {
     @Column(name = "address")
     private String address;
 
-    @Builder.Default
-    @ManyToMany(mappedBy = "locations", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    private Set<JobOfferEntity> jobOffers = new HashSet<>();
-
+    @ManyToMany(mappedBy = "locations")
+    private Set<JobOfferEntity> jobOffers;
 }

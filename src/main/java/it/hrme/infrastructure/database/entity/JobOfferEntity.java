@@ -16,13 +16,10 @@ import java.util.Set;
 @NoArgsConstructor
 @Table(name = "job_offer")
 @EqualsAndHashCode(callSuper = true)
-@ToString(exclude = {"skills",
-        "agent",
-        "contract",
-        "workTypes",
-        "requiredWorkAvailabilities",
-        "employmentForms",
-        "locations"}, callSuper = true)
+@ToString(exclude =
+        {"skills", "agent", "contract", "workTypes", "requiredWorkAvailabilities", "employmentForms", "locations"},
+        callSuper = true
+)
 @AttributeOverride(name = "id", column = @Column(name = "job_offer_id"))
 public class JobOfferEntity extends BaseEntity {
 
@@ -39,7 +36,7 @@ public class JobOfferEntity extends BaseEntity {
     private LocalDate datePublished;
 
     @Builder.Default
-    @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    @ManyToMany(cascade = {CascadeType.MERGE})
     @JoinTable(name = "job_offer_skill",
             joinColumns = @JoinColumn(name = "job_offer_id"),
             inverseJoinColumns = @JoinColumn(name = "skill_id")
@@ -54,7 +51,7 @@ public class JobOfferEntity extends BaseEntity {
     private ContractEntity contract;
 
     @Builder.Default
-    @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    @ManyToMany(cascade = {CascadeType.MERGE})
     @JoinTable(name = "job_offer_work_type",
             joinColumns = @JoinColumn(name = "job_offer_id"),
             inverseJoinColumns = @JoinColumn(name = "work_type_id")
@@ -62,7 +59,7 @@ public class JobOfferEntity extends BaseEntity {
     private Set<WorkTypeEntity> workTypes = new HashSet<>();
 
     @Builder.Default
-    @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    @ManyToMany(cascade = {CascadeType.MERGE})
     @JoinTable(name = "job_offer_required_work_availability",
             joinColumns = @JoinColumn(name = "job_offer_id"),
             inverseJoinColumns = @JoinColumn(name = "required_work_availability_id")
@@ -70,7 +67,7 @@ public class JobOfferEntity extends BaseEntity {
     private Set<RequiredWorkAvailabilityEntity> requiredWorkAvailabilities = new HashSet<>();
 
     @Builder.Default
-    @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    @ManyToMany(cascade = {CascadeType.MERGE})
     @JoinTable(name = "job_offer_employment_form",
             joinColumns = @JoinColumn(name = "job_offer_id"),
             inverseJoinColumns = @JoinColumn(name = "employment_form_id")
@@ -78,7 +75,7 @@ public class JobOfferEntity extends BaseEntity {
     private Set<EmploymentFormEntity> employmentForms = new HashSet<>();
 
     @Builder.Default
-    @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinTable(name = "job_offer_location",
             joinColumns = @JoinColumn(name = "job_offer_id"),
             inverseJoinColumns = @JoinColumn(name = "location_id")

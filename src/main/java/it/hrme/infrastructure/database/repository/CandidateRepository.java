@@ -2,6 +2,7 @@ package it.hrme.infrastructure.database.repository;
 
 import it.hrme.business.dao.CandidateDAO;
 import it.hrme.domain.Candidate;
+import it.hrme.infrastructure.database.constants.Status;
 import it.hrme.infrastructure.database.entity.CandidateEntity;
 import it.hrme.infrastructure.database.repository.jpa.CandidateJpaRepository;
 import it.hrme.infrastructure.database.repository.mapper.CandidateEntityMapper;
@@ -44,14 +45,14 @@ public class CandidateRepository implements CandidateDAO {
     @Override
     public List<Candidate> findAllByStatus(String status) {
         if (status.equalsIgnoreCase("ACTIVE")) {
-            List<CandidateEntity> candidateEntities = candidateJpaRepository.findByStatus(CandidateEntity.Status.ACTIVE);
+            List<CandidateEntity> candidateEntities = candidateJpaRepository.findByStatus(Status.ACTIVE);
             return candidateEntities.stream()
                     .map(candidateEntityMapper::mapFromEntity)
                     .toList();
         }
 
         if (status.equalsIgnoreCase("SUSPENDED")) {
-            List<CandidateEntity> candidateEntities = candidateJpaRepository.findByStatus(CandidateEntity.Status.SUSPENDED);
+            List<CandidateEntity> candidateEntities = candidateJpaRepository.findByStatus(Status.SUSPENDED);
             return candidateEntities.stream()
                     .map(candidateEntityMapper::mapFromEntity)
                     .toList();
@@ -84,9 +85,9 @@ public class CandidateRepository implements CandidateDAO {
         CandidateEntity candidateEntity = candidateEntityMapper.mapToEntity(candidate);
         if (workInterest) {
             candidateEntity.setWorkInterest(true);
-            candidateEntity.setStatus(CandidateEntity.Status.ACTIVE);
+            candidateEntity.setStatus(Status.ACTIVE);
         }
         candidateEntity.setWorkInterest(false);
-        candidateEntity.setStatus(CandidateEntity.Status.SUSPENDED);
+        candidateEntity.setStatus(Status.SUSPENDED);
     }
 }

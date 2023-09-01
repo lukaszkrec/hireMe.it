@@ -1,5 +1,6 @@
 package it.hrme.domain;
 
+import it.hrme.infrastructure.database.constants.Form;
 import lombok.*;
 
 import java.util.HashSet;
@@ -17,12 +18,4 @@ public class EmploymentForm {
     Form form;
     @Builder.Default
     Set<JobOffer> jobOffers = new HashSet<>();
-
-    @Getter
-    @AllArgsConstructor
-    public enum Form {
-        B2B("B2B"), EMPLOYMENT_CONTRACT("Emloyment contract");
-
-        private final String label;
-    }
 }

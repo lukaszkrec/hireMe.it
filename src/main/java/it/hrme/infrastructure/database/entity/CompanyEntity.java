@@ -13,7 +13,7 @@ import java.util.Set;
 @NoArgsConstructor
 @Table(name = "company")
 @EqualsAndHashCode(callSuper = true)
-@ToString(exclude = {"agents", "address"}, callSuper = true)
+@ToString(exclude = {"agents"}, callSuper = true)
 @AttributeOverride(name = "id", column = @Column(name = "company_id"))
 public class CompanyEntity extends BaseEntity {
 
@@ -29,8 +29,4 @@ public class CompanyEntity extends BaseEntity {
     @Builder.Default
     @OneToMany(mappedBy = "company", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     private Set<AgentEntity> agents = new HashSet<>();
-
-    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name = "address_id")
-    private AddressEntity address;
 }

@@ -1,5 +1,6 @@
 package it.hrme.infrastructure.database.entity;
 
+import it.hrme.infrastructure.database.constants.Status;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
@@ -10,11 +11,11 @@ import java.util.Set;
 @Setter
 @Getter
 @Entity
-@SuperBuilder
+@SuperBuilder(toBuilder = true)
 @NoArgsConstructor
 @Table(name = "candidate")
 @EqualsAndHashCode(callSuper = true)
-@ToString(exclude = {"skills", "address", "contracts"}, callSuper = true)
+@ToString(exclude = {"skills", "contracts"}, callSuper = true)
 @AttributeOverride(name = "id", column = @Column(name = "candidate_id"))
 public class CandidateEntity extends BaseEntity {
 
@@ -42,7 +43,7 @@ public class CandidateEntity extends BaseEntity {
     private boolean workInterest = true;
 
     @Builder.Default
-    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE})
     @JoinTable(name = "candidate_skill",
             joinColumns = @JoinColumn(name = "candidate_id"),
             inverseJoinColumns = @JoinColumn(name = "skill_id")
@@ -54,19 +55,9 @@ public class CandidateEntity extends BaseEntity {
     @Enumerated(EnumType.STRING)
     private Status status = Status.ACTIVE;
 
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "address_id")
-    private AddressEntity address;
-
     @Builder.Default
-    @OneToMany(mappedBy = "candidate", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
+    @OneToMany(mappedBy = "candidate", cascade = CascadeType.REMOVE)
     private Set<ContractEntity> contracts = new HashSet<>();
 
-    @Getter
-    @AllArgsConstructor
-    public enum Status {
-        ACTIVE("Active"), SUSPENDED("Suspended");
 
-        private final String label;
-    }
 }
