@@ -1,18 +1,42 @@
 package it.hrme.util;
 
 import it.hrme.domain.*;
+import it.hrme.infrastructure.database.constants.*;
 import it.hrme.infrastructure.database.entity.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.HexFormat;
+import java.util.List;
 import java.util.Set;
 
-import static it.hrme.infrastructure.database.entity.EmploymentFormEntity.Form.B2B;
-import static it.hrme.infrastructure.database.entity.WorkTypeEntity.Type.HYBRID;
+import static it.hrme.infrastructure.database.constants.Form.*;
+import static it.hrme.infrastructure.database.constants.Status.*;
+import static it.hrme.infrastructure.database.constants.Type.*;
+import static it.hrme.infrastructure.database.constants.WorkAvailability.*;
 
 public interface EntityFixtures {
+
+    default List<SkillEntity> getSkillsEntityList() {
+        return List.of(
+                SkillEntity.builder()
+                        .skillName(SkillName.JAVA)
+                        .build(),
+                SkillEntity.builder()
+                        .skillName(SkillName.C_SHARP)
+                        .build(),
+                SkillEntity.builder()
+                        .skillName(SkillName.C_PLUS_PLUS)
+                        .build(),
+                SkillEntity.builder()
+                        .skillName(SkillName.SQL)
+                        .build(),
+                SkillEntity.builder()
+                        .skillName(SkillName.PYTHON)
+                        .build()
+        );
+    }
 
     default Candidate getCandidate() {
         return Candidate.builder()
@@ -24,8 +48,7 @@ public interface EntityFixtures {
                 .overview("Some text     example about yourself")
                 .workInterest(true)
                 .skills(Set.of(getSkill()))
-                .status(Candidate.Status.ACTIVE)
-                .address(getAddress())
+                .status(ACTIVE)
                 .contracts(Set.of(getContract()))
                 .build();
     }
@@ -37,18 +60,9 @@ public interface EntityFixtures {
                 .build();
     }
 
-    default Address getAddress() {
-        return Address.builder()
-                .country("Poland")
-                .city("Krakow")
-                .postalCode("54-564")
-                .street("Zwycięstwa 16")
-                .build();
-    }
-
     default Skill getSkill() {
         return Skill.builder()
-                .skillName("Java")
+                .skillName(SkillName.JAVA)
                 .build();
     }
 
@@ -100,20 +114,20 @@ public interface EntityFixtures {
 
     default EmploymentForm getEmploymentForm() {
         return EmploymentForm.builder()
-                .form(EmploymentForm.Form.EMPLOYMENT_CONTRACT)
+                .form(EMPLOYMENT_CONTRACT)
                 .build();
 
     }
 
     default RequiredWorkAvailability getRequiredWorkAvailability() {
         return RequiredWorkAvailability.builder()
-                .workAvailability(RequiredWorkAvailability.WorkAvailability.PART_TIME)
+                .workAvailability(PART_TIME)
                 .build();
     }
 
     default WorkType getWorkType() {
         return WorkType.builder()
-                .type(WorkType.Type.REMOTE)
+                .type(REMOTE)
                 .build();
 
     }
@@ -123,22 +137,30 @@ public interface EntityFixtures {
                 .companyName("Januszex")
                 .industry("Automotive")
                 .description("Fast growing company")
-                .address(getAddress())
                 .build();
     }
 
-    default JobOfferEntity getJobOfferEntity() {
+    default JobOfferEntity getJobOfferEntity1() {
         return JobOfferEntity.builder()
                 .title("Junior Java Developer ")
                 .description("Supper company")
                 .salary(new BigDecimal("15000"))
                 .datePublished(LocalDate.now())
-                .skills(Set.of(getSkillEntity()))
                 .agent(getAgentEntity())
                 .build();
     }
 
-    default LocationEntity getLocationEntity() {
+    default JobOfferEntity getJobOfferEntity2() {
+        return JobOfferEntity.builder()
+                .title("Junior QA")
+                .description("Nice")
+                .salary(new BigDecimal("4562.43"))
+                .datePublished(LocalDate.now())
+                .agent(getAgentEntity())
+                .build();
+    }
+
+    default LocationEntity getLocationEntity1() {
         return LocationEntity.builder()
                 .country("Poland")
                 .city("Gdańsk")
@@ -147,24 +169,12 @@ public interface EntityFixtures {
                 .build();
     }
 
-    default EmploymentFormEntity getEmploymentFormEntity() {
-        return EmploymentFormEntity.builder()
-                .form(B2B)
-                .jobOffers(Set.of(getJobOfferEntity()))
-                .build();
-    }
-
-    default RequiredWorkAvailabilityEntity getRequiredWorkAvailabilityEntity() {
-        return RequiredWorkAvailabilityEntity.builder()
-                .workAvailability(RequiredWorkAvailabilityEntity.WorkAvailability.FULL_TIME)
-                .jobOffers(Set.of(getJobOfferEntity()))
-                .build();
-    }
-
-    default WorkTypeEntity getWorkTypeEntity() {
-        return WorkTypeEntity.builder()
-                .type(HYBRID)
-                .jobOffers(Set.of(getJobOfferEntity()))
+    default LocationEntity getLocationEntity2() {
+        return LocationEntity.builder()
+                .country("Poland")
+                .city("Koszalin")
+                .postalCode("75-512")
+                .address("Koszalinska 125a")
                 .build();
     }
 
@@ -172,7 +182,7 @@ public interface EntityFixtures {
         return ContractEntity.builder()
                 .startDate(LocalDate.of(2023, 2, 1))
                 .endDate(LocalDate.of(2024, 3, 6))
-                .jobOffer(getJobOfferEntity())
+                .jobOffer(getJobOfferEntity1())
                 .build();
     }
 
@@ -185,9 +195,7 @@ public interface EntityFixtures {
                 .photo(getPhoto())
                 .overview("Some text example about yourself")
                 .workInterest(true)
-                .skills(Set.of(getSkillEntity()))
-                .status(CandidateEntity.Status.ACTIVE)
-                .address(getAddressEntity())
+                .status(ACTIVE)
                 .build();
     }
 
@@ -197,9 +205,15 @@ public interface EntityFixtures {
     }
 
 
-    default SkillEntity getSkillEntity() {
+    default SkillEntity getSkillEntity1() {
         return SkillEntity.builder()
-                .skillName("Java")
+                .skillName(SkillName.JAVA)
+                .build();
+    }
+
+    default SkillEntity getSkillEntity2() {
+        return SkillEntity.builder()
+                .skillName(SkillName.SQL)
                 .build();
     }
 
@@ -208,16 +222,6 @@ public interface EntityFixtures {
                 .companyName("Januszex")
                 .industry("Automotive")
                 .description("Fast growing company")
-                .address(getAddressEntity())
-                .build();
-    }
-
-    default AddressEntity getAddressEntity() {
-        return AddressEntity.builder()
-                .country("Poland")
-                .city("Krakow")
-                .postalCode("54-564")
-                .street("Zwycięstwa 16")
                 .build();
     }
 }
