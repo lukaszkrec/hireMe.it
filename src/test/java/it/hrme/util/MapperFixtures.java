@@ -1,6 +1,7 @@
 package it.hrme.util;
 
 import it.hrme.domain.*;
+import it.hrme.infrastructure.database.constants.*;
 import it.hrme.infrastructure.database.entity.*;
 
 import java.math.BigDecimal;
@@ -9,8 +10,13 @@ import java.util.HashSet;
 import java.util.HexFormat;
 import java.util.Set;
 
-import static it.hrme.infrastructure.database.entity.EmploymentFormEntity.Form.B2B;
-import static it.hrme.infrastructure.database.entity.WorkTypeEntity.Type.HYBRID;
+import static it.hrme.infrastructure.database.constants.Form.*;
+import static it.hrme.infrastructure.database.constants.Form.B2B;
+import static it.hrme.infrastructure.database.constants.SkillName.*;
+import static it.hrme.infrastructure.database.constants.Status.*;
+import static it.hrme.infrastructure.database.constants.Type.*;
+import static it.hrme.infrastructure.database.constants.Type.HYBRID;
+import static it.hrme.infrastructure.database.constants.WorkAvailability.*;
 
 public interface MapperFixtures {
 
@@ -21,11 +27,10 @@ public interface MapperFixtures {
                 .phone("+48 523 854 455")
                 .email("jan.kowalski.@gmail.com")
                 .photo(getPhoto())
-                .overview("Some text     example about yourself")
+                .overview("Some text example about yourself")
                 .workInterest(true)
                 .skills(Set.of(getSkill()))
-                .status(Candidate.Status.ACTIVE)
-                .address(getAddress())
+                .status(ACTIVE)
                 .contracts(Set.of(getContract()))
                 .build();
     }
@@ -37,18 +42,9 @@ public interface MapperFixtures {
                 .build();
     }
 
-    default Address getAddress() {
-        return Address.builder()
-                .country("Poland")
-                .city("Krakow")
-                .postalCode("54-564")
-                .street("Zwycięstwa 16")
-                .build();
-    }
-
     default Skill getSkill() {
         return Skill.builder()
-                .skillName("Java")
+                .skillName(JAVA)
                 .build();
     }
 
@@ -100,20 +96,20 @@ public interface MapperFixtures {
 
     default EmploymentForm getEmploymentForm() {
         return EmploymentForm.builder()
-                .form(EmploymentForm.Form.EMPLOYMENT_CONTRACT)
+                .form(EMPLOYMENT_CONTRACT)
                 .build();
 
     }
 
     default RequiredWorkAvailability getRequiredWorkAvailability() {
         return RequiredWorkAvailability.builder()
-                .workAvailability(RequiredWorkAvailability.WorkAvailability.PART_TIME)
+                .workAvailability(PART_TIME)
                 .build();
     }
 
     default WorkType getWorkType() {
         return WorkType.builder()
-                .type(WorkType.Type.REMOTE)
+                .type(REMOTE)
                 .build();
 
     }
@@ -123,7 +119,6 @@ public interface MapperFixtures {
                 .companyName("Januszex")
                 .industry("Automotive")
                 .description("Fast growing company")
-                .address(getAddress())
                 .build();
     }
 
@@ -158,7 +153,7 @@ public interface MapperFixtures {
 
     default RequiredWorkAvailabilityEntity getRequiredWorkAvailabilityEntity() {
         return RequiredWorkAvailabilityEntity.builder()
-                .workAvailability(RequiredWorkAvailabilityEntity.WorkAvailability.FULL_TIME)
+                .workAvailability(FULL_TIME)
                 .build();
     }
 
@@ -185,8 +180,7 @@ public interface MapperFixtures {
                 .overview("Some text example about yourself")
                 .workInterest(true)
                 .skills(Set.of(getSkillEntity()))
-                .status(CandidateEntity.Status.ACTIVE)
-                .address(getAddressEntity())
+                .status(ACTIVE)
                 .build();
     }
 
@@ -198,7 +192,7 @@ public interface MapperFixtures {
 
     default SkillEntity getSkillEntity() {
         return SkillEntity.builder()
-                .skillName("Java")
+                .skillName(JAVA)
                 .build();
     }
 
@@ -207,16 +201,6 @@ public interface MapperFixtures {
                 .companyName("Januszex")
                 .industry("Automotive")
                 .description("Fast growing company")
-                .address(getAddressEntity())
-                .build();
-    }
-
-    default AddressEntity getAddressEntity() {
-        return AddressEntity.builder()
-                .country("Poland")
-                .city("Krakow")
-                .postalCode("54-564")
-                .street("Zwycięstwa 16")
                 .build();
     }
 }
