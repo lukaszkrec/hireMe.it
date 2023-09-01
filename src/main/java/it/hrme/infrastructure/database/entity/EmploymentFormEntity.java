@@ -1,5 +1,6 @@
 package it.hrme.infrastructure.database.entity;
 
+import it.hrme.infrastructure.database.constants.Form;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
@@ -22,15 +23,8 @@ public class EmploymentFormEntity extends BaseEntity {
     private Form form;
 
     @Builder.Default
-    @ManyToMany(mappedBy = "employmentForms", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToMany(mappedBy = "employmentForms")
     private Set<JobOfferEntity> jobOffers = new HashSet<>();
 
 
-    @Getter
-    @AllArgsConstructor
-    public enum Form {
-        B2B("B2B"), EMPLOYMENT_CONTRACT("Employment contract");
-
-        private final String label;
-    }
 }
