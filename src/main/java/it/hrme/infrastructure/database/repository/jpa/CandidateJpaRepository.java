@@ -1,5 +1,6 @@
 package it.hrme.infrastructure.database.repository.jpa;
 
+import it.hrme.infrastructure.database.constants.Status;
 import it.hrme.infrastructure.database.entity.CandidateEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -13,7 +14,7 @@ public interface CandidateJpaRepository extends JpaRepository<CandidateEntity, L
 
     Optional<CandidateEntity> findByEmail(String email);
 
-    List<CandidateEntity> findByStatus(CandidateEntity.Status status);
+    List<CandidateEntity> findByStatus(Status status);
 
     @Query("""
             SELECT can FROM CandidateEntity can
@@ -21,12 +22,4 @@ public interface CandidateJpaRepository extends JpaRepository<CandidateEntity, L
             WHERE lower(skills.skillName) = lower(:skill)
             """)
     List<CandidateEntity> findAllBySkill(String skill);
-
-
-    @Query("""
-            SELECT can FROM CandidateEntity can
-            JOIN FETCH can.address add
-            WHERE lower(add.country) = lower(:country)
-            """)
-    List<CandidateEntity> findAllByCountry(String country);
 }

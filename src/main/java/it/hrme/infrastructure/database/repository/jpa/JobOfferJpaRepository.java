@@ -10,7 +10,6 @@ import java.util.List;
 @Repository
 public interface JobOfferJpaRepository extends JpaRepository<JobOfferEntity, Long> {
 
-
     @Query("""
             SELECT job FROM JobOfferEntity job
             JOIN FETCH job.skills s
@@ -45,6 +44,4 @@ public interface JobOfferJpaRepository extends JpaRepository<JobOfferEntity, Lon
             WHERE lower(l.country) = lower(:country)
             """)
     List<JobOfferEntity> findAllByCountry(String country);
-
-
 }
