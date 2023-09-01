@@ -8,7 +8,7 @@ import java.util.Set;
 @With
 @Value
 @Builder
-@ToString(exclude = {"agents", "address"})
+@ToString(exclude = {"agents"})
 @EqualsAndHashCode(of = "uuid")
 public class Company {
 
@@ -19,5 +19,4 @@ public class Company {
     String description;
     @Builder.Default
     Set<Agent> agents = new HashSet<>();
-    Address address;
 }

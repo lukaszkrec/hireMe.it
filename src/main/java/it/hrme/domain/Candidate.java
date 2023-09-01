@@ -1,17 +1,15 @@
 package it.hrme.domain;
 
-import it.hrme.domain.exception.CandidateSuspendedStatusException;
+import it.hrme.infrastructure.database.constants.Status;
 import lombok.*;
 
 import java.util.HashSet;
 import java.util.Set;
 
-import static it.hrme.domain.Candidate.Status.SUSPENDED;
-
 @With
 @Value
 @Builder
-@ToString(exclude = {"skills", "address", "contracts"})
+@ToString(exclude = {"skills", "contracts"})
 @EqualsAndHashCode(of = "uuid")
 public class Candidate {
 
@@ -27,15 +25,6 @@ public class Candidate {
     @Builder.Default
     Set<Skill> skills = new HashSet<>();
     Status status;
-    Address address;
     @Builder.Default
     Set<Contract> contracts = new HashSet<>();
-
-    @Getter
-    @AllArgsConstructor
-    public enum Status {
-        ACTIVE("Active"), SUSPENDED("Suspended");
-
-        private final String label;
-    }
 }

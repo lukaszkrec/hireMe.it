@@ -1,5 +1,6 @@
 package it.hrme.domain;
 
+import it.hrme.infrastructure.database.constants.Type;
 import lombok.*;
 
 import java.util.HashSet;
@@ -17,8 +18,4 @@ public class WorkType {
     Type type;
     @Builder.Default
     Set<JobOffer> jobOffers = new HashSet<>();
-
-    public enum Type {
-        REMOTE, STATIONARY, HYBRID
-    }
 }

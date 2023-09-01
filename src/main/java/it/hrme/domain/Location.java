@@ -2,7 +2,6 @@ package it.hrme.domain;
 
 import lombok.*;
 
-import java.util.HashSet;
 import java.util.Set;
 
 @With
@@ -18,6 +17,5 @@ public class Location {
     String city;
     String postalCode;
     String address;
-    @Builder.Default
-    Set<JobOffer> jobOffers = new HashSet<>();
+    Set<JobOffer> jobOffers;
 }

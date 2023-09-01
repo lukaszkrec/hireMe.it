@@ -1,5 +1,6 @@
 package it.hrme.domain;
 
+import it.hrme.infrastructure.database.constants.WorkAvailability;
 import lombok.*;
 
 import java.util.HashSet;
@@ -17,12 +18,4 @@ public class RequiredWorkAvailability {
     WorkAvailability workAvailability;
     @Builder.Default
     Set<JobOffer> jobOffers = new HashSet<>();
-
-    @Getter
-    @AllArgsConstructor
-    public enum WorkAvailability {
-        FULL_TIME("Full time"), PART_TIME("Part time");
-
-        private final String label;
-    }
 }
