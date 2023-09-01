@@ -1,6 +1,8 @@
 package it.hrme.integration.configuration;
 
 import com.zaxxer.hikari.HikariDataSource;
+import org.flywaydb.core.Flyway;
+import org.flywaydb.core.api.Location;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.boot.test.context.TestConfiguration;
@@ -21,20 +23,20 @@ public class PersistenceContainerTestConfiguration {
     @Qualifier(POSTGRESQL)
     PostgreSQLContainer<?> postgresqlContainer() {
         PostgreSQLContainer<?> postgresqlContainer = new PostgreSQLContainer<>(POSTGRESQL_CONTAINER)
-            .withUsername(USERNAME)
-            .withPassword(PASSWORD);
+                .withUsername(USERNAME)
+                .withPassword(PASSWORD);
         postgresqlContainer.start();
         return postgresqlContainer;
     }
 
     @Bean
-    DataSource dataSource(final PostgreSQLContainer<?> container) {
+    DataSource dataSource() {
         return DataSourceBuilder.create()
-            .type(HikariDataSource.class)
-            .driverClassName(container.getDriverClassName())
-            .url(container.getJdbcUrl())
-            .username(container.getUsername())
-            .password(container.getPassword())
-            .build();
+                .type(HikariDataSource.class)
+                .driverClassName(postgresqlContainer().getDriverClassName())
+                .url(postgresqlContainer().getJdbcUrl())
+                .username(postgresqlContainer().getUsername())
+                .password(postgresqlContainer().getPassword())
+                .build();
     }
 }

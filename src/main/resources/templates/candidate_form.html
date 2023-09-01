@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Candidate Registration</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9"
+          crossorigin="anonymous">
+</head>
+<style>
+    h1 {
+        width: 500px;
+        margin: 0 auto;
+        text-align: center;
+    }
+</style>
+
+<body>
+
+<div class="container">
+    <h1>Candidate Registration</h1>
+</div>
+
+<div class="container my-3">
+    <div class="row">
+        <div class="col-md-8 mx-auto">
+            <form th:action="@{/candidate/save}" th:object="${candidateDto}" method="post" enctype="multipart/form-data">
+                <div class="form-row">
+                    <div class="col-md-6 form-group">
+                        <label>First name</label>
+                        <input type="text" class="form-control" th:field="*{firstName}">
+                    </div>
+                    <div class="col-md-6 form-group">
+                        <label>Last name</label>
+                        <input type="text" class="form-control" th:field="*{lastName}">
+                    </div>
+                    <div class="col-md-6 form-group">
+                        <label>Phone number</label>
+                        <input type="text" class="form-control" th:field="*{phone}">
+                    </div>
+                    <div class="col-md-6 form-group">
+                        <label>Email</label>
+                        <input type="email" class="form-control" th:field="*{email}">
+                    </div>
+                    <div class="col-md-6 form-group">
+                        <label>Skills</label>
+                        <select multiple th:name="skills" class="form-control" th:value="*{skills}">
+                            <option
+                                    th:each="skill : ${skillDtos}"
+                                    th:value="${skill}"
+                                    th:text="${skill.skillName.label}"
+                                    th:selected="${candidateDto.getSkills().contains(skill)}">
+                            </option>
+                        </select>
+                    </div>
+                    <div class="col-md-6 form-group">
+                        <label>Overview</label>
+                        <label>
+                            <textarea
+                                    th:name="overview" class="form-control" rows="7"
+                                    cols="100"
+                                    th:value="*{overview}">
+                            </textarea>
+                        </label>
+                    </div>
+
+                    <div class="col-md-6 form-group" style="max-width: 500px">
+                        <labe>Profile Image</labe>
+                        <input type="file" th:name="file" class="form-control" accept="image/*" required/>
+
+                        <div th:if="${message != null}"
+                             class="alert alert-secondary alert-dismissible fade show text-center message mt-3" role="alert">
+                            [[${message}]]
+                            <button type="button" class="close btn-sm" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+                <button type="submit" class="btn btn-primary btn-block mt-3">Save</button>
+            </form>
+        </div>
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
+        crossorigin="anonymous">
+</script>
+
+</body>
+</html>

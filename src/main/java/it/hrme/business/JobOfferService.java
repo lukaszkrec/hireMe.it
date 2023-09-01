@@ -5,13 +5,12 @@ import it.hrme.domain.JobOffer;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.StringUtils;
 
 import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-class JobOfferService {
+public class JobOfferService {
 
     private final JobOfferDAO jobOfferDAO;
 

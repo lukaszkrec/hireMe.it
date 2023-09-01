@@ -11,7 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 
-import static it.hrme.domain.Candidate.Status.SUSPENDED;
+import static it.hrme.infrastructure.database.constants.Status.SUSPENDED;
 
 @Service
 @RequiredArgsConstructor
@@ -33,8 +33,9 @@ class HiringService {
             throw new ContractNotCompletedException("Candidate has uncompleted contract!");
         }
 
+        Candidate candidateWithChangedStatus = candidate.withStatus(SUSPENDED);
         JobOffer jobOffer = jobOfferService.findById(jobOfferId);
-        Contract contract = buildContract(candidate, jobOffer);
+        Contract contract = buildContract(candidateWithChangedStatus, jobOffer);
         contractService.save(contract);
     }
 

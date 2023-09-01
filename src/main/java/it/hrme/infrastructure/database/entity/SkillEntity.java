@@ -1,5 +1,6 @@
 package it.hrme.infrastructure.database.entity;
 
+import it.hrme.infrastructure.database.constants.SkillName;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
@@ -18,7 +19,8 @@ import java.util.Set;
 public class SkillEntity extends BaseEntity {
 
     @Column(name = "skill_name")
-    private String skillName;
+    @Enumerated(EnumType.STRING)
+    private SkillName skillName;
 
     @Builder.Default
     @ManyToMany(mappedBy = "skills")

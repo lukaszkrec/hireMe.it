@@ -19,6 +19,7 @@ class ContractService {
         return contractDAO.save(contract);
     }
 
+    @Transactional
     public List<Contract> findAll() {
         return contractDAO.findALl();
     }
