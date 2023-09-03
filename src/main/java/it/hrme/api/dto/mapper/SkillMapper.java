@@ -12,11 +12,7 @@ import org.mapstruct.ReportingPolicy;
 )
 public interface SkillMapper {
 
-    @Mapping(target = "jobOffers", ignore = true)
-    @Mapping(target = "candidates", ignore = true)
     SkillDto mapToDto(Skill skill);
 
-    @Mapping(target = "jobOffers", ignore = true)
-    @Mapping(target = "candidates", ignore = true)
     Skill mapFromDto(SkillDto skillDto);
 }

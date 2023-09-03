@@ -12,27 +12,39 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
+import java.util.Base64;
 import java.util.List;
 
 @Slf4j
 @Controller
+@RequestMapping(CandidateController.API_CANDIDATE)
 @RequiredArgsConstructor
 class CandidateController {
 
-    public static final String CANDIDATE_SAVE = "/candidate/save";
+    public static final String API_CANDIDATE = "/api/candidate";
+    public static final String CANDIDATE_SAVE = "/save";
+    public static final String CANDIDATE_DETAILS = "/{email}";
 
     private final CandidateService candidateService;
     private final SkillService skillService;
 
     private final CandidateMapper candidateMapper;
     private final SkillMapper skillMapper;
+
+    @GetMapping
+    public String candidates(Model model) {
+        List<CandidateDto> candidateDtos = candidateService.findAll().stream()
+                .map(candidateMapper::mapToDto)
+                .toList();
+        model.addAttribute("candidateDtos", candidateDtos);
+        return "candidates";
+    }
 
     @GetMapping(CANDIDATE_SAVE)
     public String candidateForm(Model model) {
@@ -59,6 +71,17 @@ class CandidateController {
         Candidate candidate = candidateMapper.mapFromDto(candidateDto);
         candidateService.save(candidate);
         return "redirect:/";
+    }
+
+    @GetMapping(CANDIDATE_DETAILS)
+    public String candidateDetails(@PathVariable String email, Model model) {
+        Candidate candidate = candidateService.findByEmail(email);
+        CandidateDto candidateDto = candidateMapper.mapToDto(candidate);
+        String candidateImage = candidateService.encodeCandidatePhoto(candidateDto);
+
+        model.addAttribute("candidateImage", candidateImage);
+        model.addAttribute("candidateDto", candidateDto);
+        return "candidateDetails";
     }
 }
 

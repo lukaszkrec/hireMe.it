@@ -8,7 +8,7 @@ import java.util.Set;
 
 @Data
 @Builder
-@ToString(exclude = {"candidates", "jobOffers"})
+@ToString
 @NoArgsConstructor
 @AllArgsConstructor
 public class SkillDto {
@@ -16,8 +16,4 @@ public class SkillDto {
     private Long id;
     private String uuid;
     private SkillName skillName;
-    @Builder.Default
-    private Set<CandidateDto> candidates = new HashSet<>();
-    @Builder.Default
-    private Set<JobOfferDto> jobOffers = new HashSet<>();
 }

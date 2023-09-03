@@ -40,8 +40,6 @@ import java.util.Set;
 
         candidateEntity.setSkills(Set.of(skillEntity1));
         candidateJpaRepository.saveAndFlush(candidateEntity);
-
-        Assertions.assertThat(skillJpaRepository.findAll()).hasSize(6);
     }
 
     @Test

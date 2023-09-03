@@ -43,7 +43,7 @@ public class CandidateEntity extends BaseEntity {
     private boolean workInterest = true;
 
     @Builder.Default
-    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE})
+    @ManyToMany(cascade = {CascadeType.MERGE})
     @JoinTable(name = "candidate_skill",
             joinColumns = @JoinColumn(name = "candidate_id"),
             inverseJoinColumns = @JoinColumn(name = "skill_id")

@@ -9,15 +9,11 @@ import java.util.Set;
 @With
 @Value
 @Builder
-@ToString(exclude = {"candidates", "jobOffers"})
+@ToString
 @EqualsAndHashCode(of = "uuid")
 public class Skill {
 
     Long id;
     String uuid;
     SkillName skillName;
-    @Builder.Default
-    Set<Candidate> candidates = new HashSet<>();
-    @Builder.Default
-    Set<JobOffer> jobOffers = new HashSet<>();
 }

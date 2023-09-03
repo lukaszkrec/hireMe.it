@@ -6,8 +6,9 @@ import org.mapstruct.InjectionStrategy;
 import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;
 
-@Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.ERROR, uses = {SkillEntityMapper.class,
-        ContractEntityMapper.class}, injectionStrategy = InjectionStrategy.CONSTRUCTOR)
+@Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.ERROR,
+        uses = {SkillEntityMapper.class, ContractEntityMapper.class},
+        injectionStrategy = InjectionStrategy.CONSTRUCTOR)
 public interface CandidateEntityMapper {
 
     Candidate mapFromEntity(CandidateEntity candidateEntity);
