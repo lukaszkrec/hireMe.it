@@ -54,7 +54,6 @@ public class CandidateService {
 
     public String encodeCandidatePhoto(CandidateDto candidateDto) {
         byte[] encode = Base64.getEncoder().encode(candidateDto.getPhoto());
-        String candidateImage = new String(encode, StandardCharsets.UTF_8);
-        return candidateImage;
+        return new String(encode, StandardCharsets.UTF_8);
     }
 }

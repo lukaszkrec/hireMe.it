@@ -1,7 +1,7 @@
 package it.hrme.util;
 
 import it.hrme.domain.*;
-import it.hrme.infrastructure.database.constants.*;
+import it.hrme.infrastructure.database.constants.SkillName;
 import it.hrme.infrastructure.database.entity.*;
 
 import java.math.BigDecimal;
@@ -11,10 +11,10 @@ import java.util.HexFormat;
 import java.util.List;
 import java.util.Set;
 
-import static it.hrme.infrastructure.database.constants.Form.*;
-import static it.hrme.infrastructure.database.constants.Status.*;
-import static it.hrme.infrastructure.database.constants.Type.*;
-import static it.hrme.infrastructure.database.constants.WorkAvailability.*;
+import static it.hrme.infrastructure.database.constants.Form.EMPLOYMENT_CONTRACT;
+import static it.hrme.infrastructure.database.constants.Status.ACTIVE;
+import static it.hrme.infrastructure.database.constants.Type.REMOTE;
+import static it.hrme.infrastructure.database.constants.WorkAvailability.PART_TIME;
 
 public interface EntityFixtures {
 
