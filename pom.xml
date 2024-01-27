@@ -145,16 +145,6 @@
                     </excludes>
                 </configuration>
             </plugin>
-            <plugin>
-                <groupId>org.flywaydb</groupId>
-                <artifactId>flyway-maven-plugin</artifactId>
-                <configuration>
-                    <user>postgres</user>
-                    <password>postgres</password>
-                    <url>jdbc:postgresql://localhost:5432/hire_me_database</url>
-                    <cleanDisabled>false</cleanDisabled>
-                </configuration>
-            </plugin>
         </plugins>
     </build>
 </project>
