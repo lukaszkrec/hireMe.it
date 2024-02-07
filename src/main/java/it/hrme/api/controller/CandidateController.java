@@ -5,6 +5,7 @@ import it.hrme.api.dto.SkillDto;
 import it.hrme.api.dto.mapper.CandidateMapper;
 import it.hrme.api.dto.mapper.SkillMapper;
 import it.hrme.business.CandidateService;
+import it.hrme.business.FileService;
 import it.hrme.business.SkillService;
 import it.hrme.domain.Candidate;
 import lombok.RequiredArgsConstructor;
@@ -30,6 +31,7 @@ class CandidateController {
 
     private final CandidateService candidateService;
     private final SkillService skillService;
+    private final FileService fileService;
 
     private final CandidateMapper candidateMapper;
     private final SkillMapper skillMapper;
@@ -74,7 +76,7 @@ class CandidateController {
     public String candidateDetails(@PathVariable String email, Model model) {
         Candidate candidate = candidateService.findByEmail(email);
         CandidateDto candidateDto = candidateMapper.mapToDto(candidate);
-        String candidateImage = candidateService.encodeCandidatePhoto(candidateDto);
+        String candidateImage = fileService.encodeFile(candidateDto.getPhoto());
 
         model.addAttribute("candidateImage", candidateImage);
         model.addAttribute("candidateDto", candidateDto);

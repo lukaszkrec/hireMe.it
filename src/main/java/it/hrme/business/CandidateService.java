@@ -1,14 +1,11 @@
 package it.hrme.business;
 
-import it.hrme.api.dto.CandidateDto;
 import it.hrme.business.dao.CandidateDAO;
 import it.hrme.domain.Candidate;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.nio.charset.StandardCharsets;
-import java.util.Base64;
 import java.util.List;
 
 @Service
@@ -50,10 +47,5 @@ public class CandidateService {
     @Transactional
     public void updateWorkInterest(String candidateEmail, boolean workInterest) {
         candidateDAO.updateWorkInterest(candidateEmail, workInterest);
-    }
-
-    public String encodeCandidatePhoto(CandidateDto candidateDto) {
-        byte[] encode = Base64.getEncoder().encode(candidateDto.getPhoto());
-        return new String(encode, StandardCharsets.UTF_8);
     }
 }
